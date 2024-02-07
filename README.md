@@ -13,23 +13,23 @@ extract the wordpress zip file and put inside this directory of MAMP
 For MAC - Applications/MAMP/htdocs
 
 #### Clone the repo using SSH
-git clone git@github.com:erickestillosoph/genesis_theme.git
+~ git clone git@github.com:erickestillosoph/genesis_theme.git
 
 #### Install dependencies on the "/theme" folder directory
-npm install 
+~ npm install 
 
 ##### Install Gulp
-npm install -g gulp
+~ npm install -g gulp
 or 
-sudo install -g gulp
+~ sudo install -g gulp
 
 ##### Install the Gulp as save-dev
-npm install --save-dev gulp
+~ npm install --save-dev gulp
 or 
-sudo npm install --save-dev gulp
+~ sudo npm install --save-dev gulp
 
 ##### Install browser-sync
-sudo npm install --save-dev browser-sync
+ ~ sudo npm install --save-dev browser-sync
 
 --------------------------------------------------------
 ### what to change in
