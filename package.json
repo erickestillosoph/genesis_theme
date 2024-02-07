@@ -1,0 +1,11 @@
+{
+  "name": "genesis_tcd103",
+  "version": "1.0.0",
+  "description": "Genesis Theme",
+  "author": "hapins",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "gulp": "^4.0.2"
+  }
+}
