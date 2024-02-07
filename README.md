@@ -51,4 +51,4 @@ function watch(done) {
 ```
 once the proxy has been change to the right URL. Run on the directory `wp-content/themes`
 
-`gulp watch`
+$ `gulp watch`
