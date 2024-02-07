@@ -1,8 +1,16 @@
 # Genesis Theme Modified 
 ## HapIns Philippines Wordpress Website
 
-### Go to "themes" folder of your local development server
-### use MAMP for local server development
+#### Go to "themes" folder of your local development server
+#### use MAMP for local server development
+MAC - https://www.mamp.info/en/mac/
+Windows - https://www.mamp.info/en/windows/
+
+#### Install Wordpress
+https://wordpress.org/
+
+extract the wordpress zip file and put inside this directory of MAMP
+For MAC - Applications/MAMP/htdocs
 
 #### Clone the repo using SSH
 git clone git@github.com:erickestillosoph/genesis_theme.git
@@ -41,4 +49,6 @@ function watch(done) {
 }
 
 ```
+once the proxy has been change to the right URL. Run on the directory `wp-content/themes`
 
+`gulp watch`
