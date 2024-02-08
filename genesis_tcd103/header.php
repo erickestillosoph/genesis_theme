@@ -154,6 +154,7 @@
            if( !empty( $images ) ){
     ?>
     <div class="overlay" style="background:rgba(<?php echo esc_attr($overlay); ?>,<?php echo esc_attr($overlay_opacity); ?>);"></div>
+    <div class="overlay" style="background:rgba(<?php echo esc_attr($overlay); ?>,<?php echo esc_attr($overlay_opacity); ?>);"></div>
     <?php
              foreach( $images as $image_id ):
                $image = wp_get_attachment_image_src( $image_id, 'full' );
@@ -179,7 +180,7 @@
     ?>
     <div class="swiper-slide item item first_item" data-item-type="type2">
      <div class="item-inner">
-      <div class="overlay" style="background:rgba(<?php echo esc_attr($overlay); ?>,<?php echo esc_attr($overlay_opacity); ?>);"></div>
+     <div class="overlay" style="background: linear-gradient(rgba(<?php echo esc_attr($overlay); ?>,<?php echo esc_attr($overlay_opacity); ?>), rgba(255,255,255, 1))"></div>
       <video class="bg_video" src="<?php echo esc_url(wp_get_attachment_url($video_url)); ?>" playsinline muted></video>
      </div>
     </div><!-- END .item -->
@@ -193,7 +194,7 @@
     ?>
     <div class="swiper-slide item item first_item" data-item-type="type3">
      <div class="item-inner">
-      <div class="overlay" style="background:rgba(<?php echo esc_attr($overlay); ?>,<?php echo esc_attr($overlay_opacity); ?>);"></div>
+     <div class="overlay" style="background: linear-gradient(rgba(<?php echo esc_attr($overlay); ?>,<?php echo esc_attr($overlay_opacity); ?>), rgba(255,255,255, 1))"></div>
       <div class="bg_youtube" data-video-id="<?php echo esc_attr( $youtube_id ); ?>"></div>
      </div>
     </div><!-- END .item -->

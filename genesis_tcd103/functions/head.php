@@ -85,7 +85,7 @@ body, input, textarea { font-family:var(--font_family_type3); }
 #single_post_header .title { font-family:var(--font_family_type3); font-weight:600; }
 <?php }; ?>
 
-.rich_font_type1 { font-family:var(--font_family_type1); font-weight:600; }
+.rich_font_type1 { font-family:var(--font_family_type1); font-weight:400; }
 .rich_font_type2 { font-family:var(--font_family_type2); font-weight:600; }
 .rich_font_type3 { font-family:var(--font_family_type3); font-weight:600; }
 
