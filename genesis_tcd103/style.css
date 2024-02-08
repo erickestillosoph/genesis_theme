@@ -279,7 +279,7 @@ body.single-service .post_row + .shutter_image, body.page-template-page-tcd-lp .
 #header_slider_content .desc_area p.mobile { display:none; }
 #header_slider_wrap.layout_type3 .desc_area a { color:#fff; }
 #header_slider_content .content .line { display:block; overflow:hidden; text-align: center; }
-#header_slider_content .content .line_inner { transform: translate3d(0,100%,0); color: #2D3748; opacity:1; display:inline-block; transition: transform 0.7s ease, opacity 0.9s ease; }
+#header_slider_content .content .line_inner { transform: translate3d(0,100%,0); color: #283F75; opacity:1; display:inline-block; transition: transform 0.7s ease, opacity 0.9s ease; }
 #header_slider_content .content .desc .line_inner { transition: transform 0.7s ease 0.2s, opacity 0.9s ease 0.2s; } 
 #header_slider_wrap.start_slide #header_slider_content .content .line_inner { transform: translate3d(0,0,0); opacity:1; }
 #header_slider_wrap.layout_type3 #header_slider_content { height:100vh; position:absolute; top:0; left:0; z-index:3; color:#fff; }
