@@ -780,7 +780,7 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
   #drawer_menu_button span:nth-child(1) { top:24px; }
   #drawer_menu_button span:nth-child(2) { top:30px; }
   #drawer_menu_button span:nth-child(3) { top:36px; }
-	body.header_type2 #drawer_menu_button span { background:#fff; }
+	body.header_type2 #drawer_menu_button span { background: #283F75; }
 	body.header_type2.header_fixed #drawer_menu_button span { background:#000; }
   html.open_drawer_menu #drawer_menu_button span:nth-child(1) { transform:rotate(45deg); left:28px; top:30px; }
   html.open_drawer_menu #drawer_menu_button span:nth-child(3) { transform:rotate(-45deg); left:28px; top:30px; }
@@ -852,7 +852,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 ---------------------------------------------------------------------- */
 @media screen and (max-width:1250px) {
   #drawer_menu {
-    display:block; position:fixed; top:0px; right:0; width:400px; height:100vh; height:100dvh; background:#000; overflow:auto; z-index:99999;
+    display:block; position:fixed; top:0px; right:0; width:400px; height:100vh; height:100dvh; background:#fff; overflow:auto; z-index:99999;
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); -webkit-overflow-scrolling: touch; pointer-events:none; transform: translate3d(100%,0,0);
   }
   .open_menu #drawer_menu { transform: translate3d(0,0,0); pointer-events:auto; }
@@ -882,7 +882,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 /* 閉じるボタン */
 #drawer_menu .header { position:relative; width:100%; height:50px; border-bottom:1px solid rgba(255,255,255,0.2); }
 #drawer_mneu_close_button { cursor:pointer; display:block; width:50px; height:50px; position:absolute; top:0px; right:0px; z-index:10; }
-#drawer_mneu_close_button:before { color:#fff; font-family:'design_plus'; content:'\e91a'; font-size:20px; display:block; top:17px; left:12px; position:absolute; }
+#drawer_mneu_close_button:before { color:#283F75; font-family:'design_plus'; content:'\e91a'; font-size:20px; display:block; top:17px; left:12px; position:absolute; }
 
 
 /* グローバルメニュー */
@@ -891,7 +891,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 #mobile_menu li ul { display:none; }
 #mobile_menu a {
   position:relative; display:block;  margin:0; padding:0 50px 0 20px; height:50px; line-height:50px; overflow:hidden; text-decoration:none;
-  color:#fff !important; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.2); transition:none;
+  color:#283F75 !important; font-size:14px; border-bottom:1px solid rgba(28, 28, 28, 0.071); transition:none;
   overflow:hidden; white-space:nowrap; text-overflow:ellipsis; visibility:visible;
 }
 #mobile_menu li li a { border:none; height:50px; line-height:50px; }
@@ -920,7 +920,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 
 /* 検索フォーム */
 #drawer_menu_search { margin:30px 20px 0; position:relative; width:auto; }
-#drawer_menu_search .input_area { background:#222222; width:100%; height:40px; border-radius:40px; position:relative; }
+#drawer_menu_search .input_area { background:#eaeaeb; width:100%; height:40px; border-radius:40px; position:relative; }
 #drawer_menu_search .input_area input { font-size:12px; border:none; background:none; height:40px; width:calc(100% - 40px); position:absolute; left:0px; top:2px; padding:0 10px 0 25px; color:#fff; }
 #drawer_menu_search .button_area { width:40px; height:40px; position:absolute; right:0px; top:0px; }
 #drawer_menu_search .button_area input { width:40px; height:40px; border:none; background:none; cursor:pointer; }
@@ -1012,7 +1012,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
   }
 	#next_prev_post .nav:after {
     z-index:10; position:absolute; margin-top:2px; left:15px; top:50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);
-    font-family:'design_plus'; color:#000; font-size:12px; font-weight:500; display:block;
+    font-family:'Noto_Sans'; color:#000; font-size:12px; font-weight:500; display:block;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     -webkit-transition: all 0.2s ease; transition: all 0.2s ease;
   }
