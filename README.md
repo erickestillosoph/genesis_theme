@@ -12,7 +12,7 @@ https://wordpress.org/
 extract the wordpress zip file and put inside this directory of MAMP
 For MAC - Applications/MAMP/htdocs
 
-#### Clone the repo using SSH on the MAMP/htdocs/theme/wordpress/wp-content/themes
+#### Clone the repo using SSH on the MAMP/htdocs/wordpress/wp-content/themes
 ~ ` git clone git@github.com:erickestillosoph/genesis_theme.git . `
 
 #### Install dependencies on the "/theme" folder directory
