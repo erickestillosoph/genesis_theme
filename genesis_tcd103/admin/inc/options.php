@@ -26,6 +26,11 @@ $hover3_direct_options = array(
   'type1' => array('value' => 'type1','label' => __( 'Left to Right', 'tcd-genesis' )),
 );
 
+global $image_position_type;
+$image_position_type = array(
+  'left' => array('value' => 'left','label' => __( 'Left', 'tcd-genesis' )),
+  'right' => array('value' => 'right','label' => __( 'Right', 'tcd-genesis' )),
+);
 
 //フォントタイプ
 global $font_type_options;
