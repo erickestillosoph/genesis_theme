@@ -1,19 +1,7 @@
 .section_content{
   position: relative;
 }
-.section_style{
-  padding: 0px !important;
-}
-.add_content_section_style{
-  padding: 150px 0px !important;
-}
-.orange_cirles_style{
-  background-color: #fe8d01 !important;
-  border-radius: 100%;
-  height: 24px;
-  width: 24px;
-  
-}
+
 .marquee {
   display: inline-flex;
   position: absolute;
@@ -23,12 +11,6 @@
   border-bottom: 3px solid #283F75 ;
   background-color: #fff !important;
   align-items: center;
-}
-
-.add_font_style{
-  font-size: 76px !important;
-  font-weight: 400 !important;
-  color: #283F75 !important;
 }
 
 @keyframes marqueeAnimation {
