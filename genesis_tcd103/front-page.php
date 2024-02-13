@@ -7,8 +7,32 @@ get_header();
     // メインカラー ----------------------------------
     $main_color = $options['main_color'];
     ?>
-  .orange_image_background {
-      background-color:<?php echo esc_html($main_color); ?> !important;
+    .orange_image_background, .orange_cirles_style  { background-color:<?php echo esc_html($main_color); ?> !important;}   
+    .main_color  { color:<?php echo esc_html($main_color); ?> !important;}   
+
+<?php
+   $tag_font_size = $options['tag_font_size'] ? $options['tag_font_size'] : '120';
+   $tag_font_size_sp = $options['tag_font_size_sp'] ? $options['tag_font_size_sp'] : '60';
+?>   
+
+    .tag_text_size {
+      font-size:<?php echo esc_html($tag_font_size); ?>px !important;
+    }
+    @media screen and (max-width:1100px) {
+      .tag_text_size {
+        font-size:<?php echo esc_html(floor(($tag_font_size + $tag_font_size_sp) / 1.8)); ?>px !important;
+      }
+    }
+    @media screen and (max-width:800px) {
+
+      .tag_text_size {
+        font-size:<?php echo esc_html($tag_font_size_sp); ?>px !important;
+      }
+    }
+    @media screen and (max-width:370px) {
+      .tag_text_size {
+        font-size:<?php echo esc_html($tag_font_size_sp); ?>px !important;
+      }
     }
 </style>    
 <?php
@@ -155,12 +179,109 @@ if ($options['index_content_type'] == 'type2') {
               ; ?>
 
             </section><!-- END .cb_design_content -->
-
             <?php
             // サービス一覧 --------------------------------------------------------------------------------
+          } elseif ($content['cb_content_select'] == 'marquee_text' && $content['show_content']) {
+            $text_marquee = $content['text_marquee'];
+            $index_marquee_type = $options['index_marquee_position'];
+            ?>
+            <div class="circle_custom_top">&nbsp;</div>
+            <section class="cb_marquee_content num<?php echo $content_count; ?>"
+              id="<?php echo 'cb_content_' . $content_count; ?>">
+              
+              <div class="inview">
+                
+                <div class="title_area<?php if (!$desc) {
+                  echo ' no_desc';
+                }; ?><?php 
+                      if($index_image_type === 'left'){ echo ' order_image'; };
+                      if($index_image_type === 'right'){ echo ' order_image_first margin_right_30'; };
+                    ?>">
+                 
+                  <?php if ($text_marquee) { ?>
+                    
+                    <div id="marquee_id">
+                      <div id="header_slider_content">
+                        <div class=" d_flex align-items-center">
+                          <?php foreach(range(1, 6) as $i): ?>
+                            <h2 class="catch rich_font_type1">
+                              <span class="line">
+                                <span class="liner">
+                                  <?php echo wp_kses_post(nl2br($text_marquee)); ?>
+                                </span>
+                              </span>
+                            </h2>
+                            <div class="orange_cirles_style">&nbsp;</div>
+                          <?php endforeach; ?>  
+                        </div>
+                      </div>
+                    </div>
+                  <?php }
+                  ; ?>
+                
+                </div>
+                
+              </div>
+            </section><!-- END .cb_design_content -->
+            <?php
+            // Content Free Section --------------------------------------------------------------------------------
+          } elseif ($content['cb_content_select'] == 'section_title_break' && $content['show_content']) {
+            $headline = $content['headline1'];
+            $sub_title = $content['sub_title'];
+            $logo_image = $content['logo_image'];
+            $item_image = $content['item_image1'];
+            $position_image = $content['position_of_image'];
+            $title_bg_color = $options['title_bg_color'];
+            $title_headline_color = $options['title_headline_color'];
+            $title_sub_headline_color = $options['title_sub_headline_color'];
+            ?>
+            <section class="title_break_style width_100 num<?php echo $content_count; ?>"
+              id="<?php echo 'cb_content_' . $content_count; ?>">
+              
+              <div class="title_break_section gap_40 cb_title_break_section inview align_items_center"  style="background-color:<?php echo $title_bg_color ?>">
+                
+                <div class="title_area align_items_center text_center<?php if (!$desc) {
+                  echo ' no_desc';
+                }; ?><?php 
+                      if(!$content['position_of_image']){ echo ' order_image'; }
+                      elseif ($content['position_of_image']){ echo ' order_image_first'; }
+                    ?><?php if(!$item_image){ echo ' width_100 height_40 justify_content_center d_flex flex_direction_column'; } ?>">
+                  <?php if ($headline) { ?>
+                    <h3 class="large_headline large_style" style="color: <?php echo $title_headline_color?> !important">
+                      <span>
+                        <?php echo wp_kses_post(nl2br($headline)); ?>
+                      </span>
+                    </h3>
+                  <?php }
+                  ; ?>
+                  <?php if ($sub_title) { ?>
+                    <p class="sub_title colored" style="color: <?php echo $title_sub_headline_color?> !important"><span>
+                        <?php echo esc_html($sub_title); ?>
+                      </span></p>
+                  <?php }
+                  ; ?>
+                </div>
+                <?php if ($item_image) {
+                        $item_image = wp_get_attachment_image_src($item_image, 'full');
+                        ?>
+                        <div class="position_relative title_break_wh_100 inview image_animate_opacity
+                         ">
+                          <div class="position_relative title_break_wh_100">
+                            <img loading="lazy" class="image bdr_radius_24 title_break_wh_100 animate" src="<?php echo esc_attr($item_image[0]); ?>"
+                              width="<?php echo esc_attr($item_image[1]); ?>" height="<?php echo esc_attr($item_image[2]); ?>" />
+                          </div>
+                        </div>
+                <?php } ?>
+                
+              </div>
+
+            </section><!-- END .cb_design_content -->
+            <?php
+            // Content Free Section --------------------------------------------------------------------------------
           } elseif ($content['cb_content_select'] == 'section_content_free' && $content['show_content']) {
             $super_headline = $content['super_headline'];
-            $headline = $content['headline'];
+            $headline1 = $content['headline1'];
+            $headline2 = $content['headline2'];
             $sub_title = $content['sub_title'];
             $desc = $content['desc'];
             $desc_mobile = $content['desc_mobile'];
@@ -169,19 +290,26 @@ if ($options['index_content_type'] == 'type2') {
             $item_image = $content['item_image1'];
             $link_label = $content['item_title1'];
             $link_url = $content['item_url1'];
+            $tag1 = $content['tag1'];
+            $tag2 = $content['tag2'];
+            $tag3 = $content['tag3'];
+            $tag4 = $content['tag4'];
+            $position_image = $content['position_of_image'];
             $index_image_type = $options['index_image_position'];
+            $tag_bg_color = $options['tag_bg_color'];
             ?>
             <div class="circle_custom_top">&nbsp;</div>
             <section class="cb_design_content num<?php echo $content_count; ?>"
               id="<?php echo 'cb_content_' . $content_count; ?>">
               
-              <div class="design_custom_header cb_design_header inview">
+              <div class="design_custom_header cb_custom_section_header inview">
                 
                 <div class="title_area<?php if (!$desc) {
                   echo ' no_desc';
                 }; ?><?php 
-                      if($index_image_type === 'left'){ echo ' order_image'; };
-                      if($index_image_type === 'right'){ echo ' order_image_first margin_right_30'; };
+                      if(!$content['position_of_image']){ echo ' order_image'; }
+                      elseif ($content['position_of_image']){ echo ' order_image_first margin_right_30'; }
+                      
                     ?>">
                   <?php if ($super_headline) { ?>
                     <h1 class="super_large_headline super_style"><span>
@@ -189,10 +317,15 @@ if ($options['index_content_type'] == 'type2') {
                       </span></h1>
                   <?php }
                   ; ?>
-                  <?php if ($headline) { ?>
-                    <h3 class="large_headline large_style"><span>
-                        <?php echo wp_kses_post(nl2br($headline)); ?>
-                      </span></h3>
+                  <?php if ($headline1 || $headline2) { ?>
+                    <h3 class="large_headline large_style">
+                      <span>
+                        <?php echo wp_kses_post(nl2br($headline1)); ?>
+                      </span>
+                      <span class="main_color">
+                        <?php echo wp_kses_post(nl2br($headline2)); ?>
+                      </span>
+                    </h3>
                   <?php }
                   ; ?>
                   <?php if ($sub_title) { ?>
@@ -228,21 +361,59 @@ if ($options['index_content_type'] == 'type2') {
                 <?php if ($item_image) {
                         $item_image = wp_get_attachment_image_src($item_image, 'full');
                         ?>
-                        <div class="position_relative">
-                          <div class="orange_image_background custom_image image position_absolute z_index_behind <?php if($index_image_type === 'right'){ echo ' top_right'; };if($index_image_type === 'left'){ echo ' top_left'; }; ?>" 
+                        <div class="position_relative inview <?php 
+                          if(!$content['position_of_image']){ echo ' image_animate_left'; }
+                          elseif ($content['position_of_image']){ echo ' image_animate_right'; }
+                          
+                        ?>">
+                          <div class="orange_image_background custom_image image position_absolute z_index_behind <?php if($content['position_of_image']){ echo ' top_right'; };if(!$content['position_of_image']){ echo ' top_left'; }; ?>" 
                               style="width:<?php echo esc_attr($item_image[1]); ?>px; height:<?php echo esc_attr($item_image[2]); ?>px"></div>
-                          <div class="custom_image z_index_front position_relative<?php if($index_image_type === 'left'){ echo ' margin_right_30'; };?>">
-                            <img loading="lazy" class="image" src="<?php echo esc_attr($item_image[0]); ?>"
+                          <div class="custom_image z_index_front position_relative<?php if(!$content['position_of_image']){ echo ' margin_right_30'; };?>">
+                            <img loading="lazy" class="image bdr_radius_24 box_shadow_image" src="<?php echo esc_attr($item_image[0]); ?>"
                               width="<?php echo esc_attr($item_image[1]); ?>" height="<?php echo esc_attr($item_image[2]); ?>" />
                           </div>
                         </div>
                 <?php } ?>
+                
               </div>
-             
+              <?php if ($content['show_tags']) { ?>
+                    <div class="d_flex align_items_center justify_content_center gap_40 padding_20 inview">
+                      <div class="bg_panel" style="background-color:<?php echo $tag_bg_color ?>">
+                        <h6 class="tags_text tag_text_size">
+                            <span>
+                              <?php echo wp_kses_post(nl2br($tag1)); ?>
+                            </span>
+                        </h6>
+                      </div>
+                      <div class="bg_panel" style="background-color:<?php echo $tag_bg_color ?>">
+                        <h6 class="tags_text tag_text_size">
+                              <span>
+                                <?php echo wp_kses_post(nl2br($tag2)); ?>
+                              </span>
+                          </h6>
+                      </div>
+                      <div class="bg_panel" style="background-color:<?php echo $tag_bg_color ?>">
+                          <h6 class="tags_text tag_text_size">
+                                <span>
+                                  <?php echo wp_kses_post(nl2br($tag3)); ?>
+                                </span>
+                            </h6>
+                      </div>
+                      <div class="bg_panel" style="background-color:<?php echo $tag_bg_color ?>">
+                            <h6 class="tags_text tag_text_size">
+                                <span>
+                                  <?php echo wp_kses_post(nl2br($tag4)); ?>
+                                </span>
+                            </h6>
+                      </div>
+                    </div>
+                  <?php }
+                  ; ?>
               
 
             </section><!-- END .cb_design_content -->
             <div class="circle_custom_bottom">&nbsp;</div>
+        
             <?php
             // サービス一覧 --------------------------------------------------------------------------------
           } elseif ($content['cb_content_select'] == 'service_list' && $content['show_content']) {

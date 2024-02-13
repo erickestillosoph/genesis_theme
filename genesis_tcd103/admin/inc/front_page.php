@@ -34,6 +34,18 @@ function add_front_page_dp_default_options($dp_default_options)
   // ヘッダースライダー
   $dp_default_options['index_slider_layout'] = 'type1';
 
+  // Tag color picker
+  $dp_default_options['tag_bg_color'] = '#283F75';
+
+  // Title break background
+  $dp_default_options['title_bg_color'] = '#1A202C';
+
+  // Title break background
+  $dp_default_options['title_headline_color'] = '#fe8d01';
+
+  // Title break background
+  $dp_default_options['title_sub_headline_color'] = '#fff';
+
   // 左側のコンテンツ
   $dp_default_options['index_slider_catch'] = 'CATCHPHRASE';
   $dp_default_options['index_slider_catch_font_type'] = 'type2';
@@ -60,8 +72,12 @@ function add_front_page_dp_default_options($dp_default_options)
   $dp_default_options['page_content_width'] = '1030';
   $dp_default_options['index_content_type'] = 'type1';
 
-  //Content Free 
-  $dp_default_options['index_image_position'] = 'right';
+  //Marquee Text 
+  $dp_default_options['index_marquee_position'] = 'right';
+
+  //Tag Text
+  $dp_default_options['tag_font_size'] = '24';
+  $dp_default_options['tag_font_size_sp'] = '14';
 
   $dp_default_options['contents_builder'] = array(
     array(
@@ -109,8 +125,11 @@ function add_front_page_dp_default_options($dp_default_options)
     array(
       "cb_content_select" => "section_content_free",
       "show_content" => 1,
+      "show_tags" => 1,
+      "position_of_image" => 1,
       "super_headline" => 'SUPER HEADLINE',
-      "headline" => 'COMPANY',
+      "headline1" => 'COMPANY',
+      "headline2" => 'COMPANY',
       "sub_title" => __('Subtitle', 'tcd-genesis'),
       "desc" => __('Description will be displayed here.', 'tcd-genesis'),
       "desc_mobile" => "",
@@ -123,8 +142,19 @@ function add_front_page_dp_default_options($dp_default_options)
       "item_title2" => __('Title', 'tcd-genesis'),
       "item_url1" => "#",
       "item_url2" => "#",
-      "overlay_color1" => "#000000",
-      "overlay_color2" => "#000000",
+    ),
+    array(
+      "cb_content_select" => "section_title_break",
+      "show_content" => 1,
+      "position_of_image" => 1,
+      "headline1" => 'COMPANY',
+      "sub_title" => __('Subtitle', 'tcd-genesis'),
+      "item_image" => "",
+    ),
+    array(
+      "cb_content_select" => "marquee_text",
+      "show_content" => 1,
+      "text_marquee" => 'COMPANY NAME',
     ),
   );
 
@@ -136,7 +166,7 @@ function add_front_page_dp_default_options($dp_default_options)
 function add_front_page_tab_panel($options)
 {
 
-  global $blog_label, $dp_default_options, $item_type_options, $time_options, $font_type_options,$image_position_type, $font_direction_options, $bool_options, $basic_display_options,
+  global $blog_label, $dp_default_options, $item_type_options, $time_options, $font_type_options,$image_position_type, $marquee_position_type, $font_direction_options, $bool_options, $basic_display_options,
   $loading_type, $loading_display_page_options, $loading_display_time_options, $logo_type_options, $font_direction_options, $slider_layout_options;
   $news_label = $options['news_label'] ? esc_html($options['news_label']) : __('News', 'tcd-genesis');
   $service_label = $options['service_label'] ? esc_html($options['service_label']) : __('Service', 'tcd-genesis');
@@ -599,6 +629,8 @@ function add_front_page_tab_panel($options)
         the_cb_content_setting('cb_cloneindex', 'news_list');
         the_cb_content_setting('cb_cloneindex', 'free_space');
         the_cb_content_setting('cb_cloneindex', 'section_content_free');
+        the_cb_content_setting('cb_cloneindex', 'section_title_break');
+        the_cb_content_setting('cb_cloneindex', 'marquee_text');
         ?>
       </div><!-- END .contents_builder-clone -->
 
@@ -616,9 +648,15 @@ function add_front_page_tab_panel($options)
 function add_front_page_theme_options_validate($input)
 {
 
-  global $dp_default_options, $item_type_options, $time_options, $font_type_options, $image_position_type, $font_direction_options;
+  global $dp_default_options, $item_type_options, $time_options, $font_type_options, $image_position_type, $marquee_position_type, $font_direction_options;
 
   $input['index_slider_layout'] = wp_filter_nohtml_kses($input['index_slider_layout']);
+
+  // Background Tag Color 
+  $input['tag_bg_color'] = sanitize_hex_color($input['tag_bg_color']);
+
+  // Background Tag Color 
+  $input['title_bg_color'] = sanitize_hex_color($input['title_bg_color']);
 
 
   // 左側のコンテンツ
@@ -647,8 +685,12 @@ function add_front_page_theme_options_validate($input)
   $input['page_content_width'] = wp_filter_nohtml_kses($input['page_content_width']);
   $input['index_header_slide_effect'] = wp_filter_nohtml_kses($input['index_header_slide_effect']);
 
-  // Content Free
-  $input['index_image_position'] = wp_filter_nohtml_kses($input['index_image_position']);
+  // Marquee Text
+  $input['index_marquee_position'] = wp_filter_nohtml_kses($input['index_marquee_position']);
+
+  // Tags Text
+  $input['tag_font_size'] = wp_filter_nohtml_kses($input['tag_font_size']);
+  $input['tag_font_size_sp'] = wp_filter_nohtml_kses($input['tag_font_size_sp']);
 
   // コンテンツビルダー -----------------------------------------------------------------------------
   if (!empty($input['contents_builder'])) {
@@ -765,7 +807,40 @@ function add_front_page_theme_options_validate($input)
 
         $value['content_width'] = wp_filter_nohtml_kses($value['content_width']);
 
+        // Title Break  -----------------------------------------------------------------------
       }
+      elseif ($value['cb_content_select'] == 'section_title_break') {
+
+        if (!isset($value['show_content']))
+          $value['show_content'] = null;
+        $value['show_content'] = ($value['show_content'] == 1 ? 1 : 0);
+
+        if (!isset($value['section_title_break'])) {
+          $value['section_title_break'] = null;
+        } else {
+          $value['section_title_break'] = $value['section_title_break'];
+        }
+
+        $value['content_width'] = wp_filter_nohtml_kses($value['content_width']);
+
+        // Marquee Text -----------------------------------------------------------------------
+      } 
+      elseif ($value['cb_content_select'] == 'marquee_text') {
+
+        if (!isset($value['show_content']))
+          $value['show_content'] = null;
+        $value['show_content'] = ($value['show_content'] == 1 ? 1 : 0);
+
+        if (!isset($value['marquee_text'])) {
+          $value['marquee_text'] = null;
+        } else {
+          $value['marquee_text'] = $value['marquee_text'];
+        }
+
+        $value['content_width'] = wp_filter_nohtml_kses($value['content_width']);
+
+      }
+      
 
       $input['contents_builder'][] = $value;
 
@@ -797,6 +872,8 @@ function the_cb_content_select($cb_index = 'cb_cloneindex', $selected = null)
     'news_list' => sprintf(__('%s list', 'tcd-genesis'), $news_label),
     'free_space' => __('Free space', 'tcd-genesis'),
     'section_content_free' => __('Content Free', 'tcd-genesis'),
+    'section_title_break' => __('Title Break', 'tcd-genesis'),
+    'marquee_text' => __('Marquee Text', 'tcd-genesis'),
   );
 
   if ($selected && isset($cb_content_select[$selected])) {
@@ -829,7 +906,7 @@ function the_cb_content_select($cb_index = 'cb_cloneindex', $selected = null)
 function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select = null, $value = array())
 {
 
-  global $blog_label, $font_type_options, $image_position_type, $button_type_options, $button_border_radius_options, $button_size_options, $button_animation_options, $post;
+  global $blog_label, $font_type_options, $image_position_type, $marquee_position_type, $button_type_options, $button_border_radius_options, $button_size_options, $button_animation_options, $post;
   $options = get_design_plus_option();
   $news_label = $options['news_label'] ? esc_html($options['news_label']) : __('News', 'tcd-genesis');
   $service_label = $options['service_label'] ? esc_html($options['service_label']) : __('Service', 'tcd-genesis');
@@ -1023,11 +1100,20 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
       if (!isset($value['show_content'])) {
         $value['show_content'] = 1;
       }
+      if (!isset($value['show_tags'])) {
+        $value['show_tags'] = 1;
+      }
+      if (!isset($value['position_of_image'])) {
+        $value['position_of_image'] = 1;
+      }
       if (!isset($value['super_headline'])) {
         $value['super_headline'] = '';
       }
-      if (!isset($value['headline'])) {
-        $value['headline'] = '';
+      if (!isset($value['headline1'])) {
+        $value['headline1'] = '';
+      }
+      if (!isset($value['headline2'])) {
+        $value['headline2'] = '';
       }
       if (!isset($value['sub_title'])) {
         $value['sub_title'] = '';
@@ -1046,6 +1132,18 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
       }
       if (!isset($value['item_image1'])) {
         $value['item_image1'] = '';
+      }
+      if (!isset($value['tag1'])) {
+        $value['tag1'] = '';
+      }
+      if (!isset($value['tag2'])) {
+        $value['tag2'] = '';
+      }
+      if (!isset($value['tag3'])) {
+        $value['tag3'] = '';
+      }
+      if (!isset($value['tag4'])) {
+        $value['tag4'] = '';
       }
      
 
@@ -1068,56 +1166,54 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
               <?php _e('Basic settings', 'tcd-genesis'); ?>
               </h4>
               <ul class="option_list">
-                <li class="cf"><span class="label"><span class="num">0</span>
+                <li class="cf"><span class="label">
                   <?php _e('Super Headline', 'tcd-genesis'); ?>
                   </span><input type="text" class="cb-repeater-label full_width"
                     name="dp_options[contents_builder][<?php echo $cb_index; ?>][super_headline]"
                     value="<?php echo esc_attr($value['super_headline']); ?>" /></li>
-                <li class="cf"><span class="label"><span class="num">1</span>
-                  <?php _e('Headline', 'tcd-genesis'); ?>
+                <li class="cf"><span class="label">
+                  <?php _e('Headline Word 1', 'tcd-genesis'); ?>
                   </span><input type="text" class="cb-repeater-label full_width"
-                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][headline]"
-                    value="<?php echo esc_attr($value['headline']); ?>" /></li>
-                <li class="cf"><span class="label"><span class="num">2</span>
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][headline1]"
+                    value="<?php echo esc_attr($value['headline1']); ?>" /></li>
+                <li class="cf"><span class="label">
+                  <?php _e('Headline Word 2', 'tcd-genesis'); ?>
+                  </span><input type="text" class="cb-repeater-label full_width"
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][headline2]"
+                    value="<?php echo esc_attr($value['headline2']); ?>" /></li>    
+                <li class="cf"><span class="label">
                   <?php _e('Subheading', 'tcd-genesis'); ?>
                   </span><input type="text" class="full_width"
                     name="dp_options[contents_builder][<?php echo $cb_index; ?>][sub_title]"
                     value="<?php echo esc_attr($value['sub_title']); ?>" /></li>
-                <li class="cf"><span class="label"><span class="num">3</span>
+                <li class="cf"><span class="label">
                   <?php _e('Description', 'tcd-genesis'); ?>
                   </span><textarea class="full_width" cols="50" rows="3"
                     name="dp_options[contents_builder][<?php echo $cb_index; ?>][desc]"><?php echo esc_textarea($value['desc']); ?></textarea>
                 </li>
-                <li class="cf"><span class="label"><span class="num">3</span>
+                <li class="cf"><span class="label">
                   <?php _e('Description (mobile)', 'tcd-genesis'); ?>
                   </span><textarea
                     placeholder="<?php _e('Please indicate if you would like to display a short text for mobile sizes.', 'tcd-genesis'); ?>"
                     class="full_width" cols="50" rows="3"
                     name="dp_options[contents_builder][<?php echo $cb_index; ?>][desc_mobile]"><?php echo esc_textarea($value['desc_mobile']); ?></textarea>
                 </li>
-                <li class="cf"><span class="label"><span class="num">4</span>
+                <li class="cf"><span class="label">
                   <?php _e('Link button label', 'tcd-genesis'); ?>
                   </span><input type="text" class="full_width"
                     name="dp_options[contents_builder][<?php echo $cb_index; ?>][button_label]"
                     value="<?php echo esc_attr($value['button_label']); ?>" /></li>
-                <li class="cf"><span class="label"><span class="num">4</span>
+                <li class="cf"><span class="label">
                   <?php _e('Link button url', 'tcd-genesis'); ?>
                   </span><input type="text" class="full_width"
                     name="dp_options[contents_builder][<?php echo $cb_index; ?>][button_url]"
                     value="<?php echo esc_attr($value['button_url']); ?>" /></li>
-                <li class="cf"><span class="label">
-                  <?php _e('Image Position', 'tcd-genesis'); ?>
-                  </span>
-                  <?php echo tcd_basic_radio_button($options, 'index_image_position', $image_position_type); ?>
-                  
-            </li>    
+              
               </ul>
 
-              <h4 class="theme_option_headline_number"><span class="num">5</span>
+              <h4 class="theme_option_headline_number">
               <?php _e('Image', 'tcd-genesis'); ?>
               </h4>
-
-
               <div>
                 <ul class="option_list">
                   <li class="cf">
@@ -1150,13 +1246,237 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
                     </div>
                   </li>
                 </ul>
+                  
               </div>
-
-
-
+                 <label class="custom_content_switch">
+                      <h4>Image Position</h4> &nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="label_wrap"><input name="dp_options[contents_builder][<?php echo $cb_index; ?>][position_of_image]"
+                          type="checkbox" value="1" <?php checked($value['position_of_image'], 1); ?>>
+                          <span class="label"><span class="on">Right</span><span class="sep"></span><span class="off">Left</span></span>
+                      </div>
+                  </label>
+                <label class="custom_content_switch">
+                    <h4>Tags Visibility</h4> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="label_wrap"><input name="dp_options[contents_builder][<?php echo $cb_index; ?>][show_tags]"
+                        type="checkbox" value="1" <?php checked($value['show_tags'], 1); ?>>
+                        <span class="label"><span class="on">ON</span><span class="sep"></span><span class="off">OFF</span></span>
+                    </div>
+                 </label>
+                 <div class="custom_content tab_parent">
+                    <div class="custom_content_switch_target">
+                      <ul class="option_list">
+                        <li class="cf"><span class="label">
+                          <?php _e('Tags Background Color', 'tcd-genesis'); ?>
+                          </span><?php echo tcd_color_option($options, 'tag_bg_color', 'js-color-preset-target--tag_bg_color'); ?>
+                        </li>
+                         <li class="cf"><span class="label">
+                              <?php _e('Font size', 'tcd-genesis'); ?>
+                            </span>
+                            <?php echo tcd_font_size_option($options, 'tag_font_size'); ?>
+                          </li>
+                        <li class="cf"><span class="label">
+                          <?php _e('Tag text 1', 'tcd-genesis'); ?>
+                          </span><input type="text" class="cb-repeater-label full_width"
+                            name="dp_options[contents_builder][<?php echo $cb_index; ?>][tag1]"
+                            value="<?php echo esc_attr($value['tag1']); ?>" />
+                        </li>
+                        <li class="cf"><span class="label">
+                          <?php _e('Tag text 2', 'tcd-genesis'); ?>
+                          </span><input type="text" class="cb-repeater-label full_width"
+                            name="dp_options[contents_builder][<?php echo $cb_index; ?>][tag2]"
+                            value="<?php echo esc_attr($value['tag2']); ?>" />
+                        </li>
+                        <li class="cf"><span class="label">
+                          <?php _e('Tag text 3', 'tcd-genesis'); ?>
+                          </span><input type="text" class="cb-repeater-label full_width"
+                            name="dp_options[contents_builder][<?php echo $cb_index; ?>][tag3]"
+                            value="<?php echo esc_attr($value['tag3']); ?>" />
+                        </li>
+                        <li class="cf"><span class="label">
+                          <?php _e('Tag text 4', 'tcd-genesis'); ?>
+                          </span><input type="text" class="cb-repeater-label full_width"
+                            name="dp_options[contents_builder][<?php echo $cb_index; ?>][tag4]"
+                            value="<?php echo esc_attr($value['tag4']); ?>" />
+                        </li>
+                      </ul>  
+                    </div>  
+                 </div> 
             </div><!-- END .cb_content_switch_target -->
 
+            <?php
 
+
+// Design Content Free　-------------------------------------------------------------
+} else if ($cb_content_select == 'section_title_break') {
+
+if (!isset($value['show_content'])) {
+  $value['show_content'] = 1;
+}
+if (!isset($value['position_of_image'])) {
+  $value['position_of_image'] = 1;
+}
+if (!isset($value['headline1'])) {
+  $value['headline1'] = '';
+}
+if (!isset($value['sub_title'])) {
+  $value['sub_title'] = '';
+}
+
+if (!isset($value['item_image1'])) {
+  $value['item_image1'] = '';
+}
+
+?>
+
+    <h3 class="cb_content_headline">
+    <?php _e('Title Break', 'tcd-genesis'); ?><span class="cb_content_headline_sub_title"></span>
+    </h3>
+    <label class="cb_content_switch">
+      <div class="label_wrap"><input name="dp_options[contents_builder][<?php echo $cb_index; ?>][show_content]"
+          type="checkbox" value="1" <?php checked($value['show_content'], 1); ?>><span class="label"><span
+            class="on">ON</span><span class="sep"></span><span class="off">OFF</span></span></div>
+    </label>
+    <div class="cb_content tab_parent">
+
+      <div class="cb_content_switch_target">
+
+        <h4 class="theme_option_headline2">
+        <?php _e('Basic settings', 'tcd-genesis'); ?>
+        </h4>
+        <ul class="option_list">
+          <li class="cf"><span class="label">
+            <?php _e('Headline', 'tcd-genesis'); ?>
+            </span><input type="text" class="cb-repeater-label full_width"
+              name="dp_options[contents_builder][<?php echo $cb_index; ?>][headline1]"
+              value="<?php echo esc_attr($value['headline1']); ?>" /></li>    
+          <li class="cf"><span class="label">
+            <?php _e('Subheading', 'tcd-genesis'); ?>
+            </span><input type="text" class="full_width"
+              name="dp_options[contents_builder][<?php echo $cb_index; ?>][sub_title]"
+              value="<?php echo esc_attr($value['sub_title']); ?>" /></li>
+        </ul>
+
+        <h4 class="theme_option_headline_number">
+        <?php _e('Image', 'tcd-genesis'); ?>
+        </h4>
+        <div>
+          <ul class="option_list">
+            <li class="cf">
+              <span class="label">
+              <?php _e('Title Image', 'tcd-genesis'); ?>
+                <span class="recommend_desc">
+                <?php printf(__('Recommend image size. Width:%1$spx, Height:%2$spx.', 'tcd-genesis'), '623', '450'); ?>
+                </span>
+              </span>
+              <div class="image_box cf">
+                <div class="cf cf_media_field hide-if-no-js dc_bg_image_<?php echo $cb_index; ?>">
+                  <input type="hidden" value="<?php echo esc_attr($value['item_image1']); ?>"
+                    id="dc_bg_image_<?php echo $cb_index; ?>"
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][item_image1]" class="cf_media_id">
+                  <div class="preview_field">
+                  <?php if ($value['item_image1']) {
+                    echo wp_get_attachment_image($value['item_image1'], 'medium');
+                  }
+                  ; ?>
+                  </div>
+                  <div class="buttton_area">
+                    <input type="button" value="<?php _e('Select Image', 'tcd-genesis'); ?>"
+                      class="cfmf-select-img button">
+                    <input type="button" value="<?php _e('Remove Image', 'tcd-genesis'); ?>" class="cfmf-delete-img button <?php if (!$value['item_image1']) {
+                         echo 'hidden';
+                       }
+                       ; ?>">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>   
+        </div>
+          <div class="custom_content tab_parent">
+                      <div class="custom_content_switch_target">
+                        <ul class="option_list">
+                          <li class="cf"><span class="label">
+                            <?php _e('Headline Text Color', 'tcd-genesis'); ?>
+                            </span><?php echo tcd_color_option($options, 'title_headline_color', 'js-color-preset-target--title_headline_color'); ?>
+                          </li>
+                        </ul>
+                      </div>    
+            </div>   
+          <div class="custom_content tab_parent">
+                      <div class="custom_content_switch_target">
+                        <ul class="option_list">
+                          <li class="cf"><span class="label">
+                            <?php _e('Sub Headline Text Color', 'tcd-genesis'); ?>
+                            </span><?php echo tcd_color_option($options, 'title_sub_headline_color', 'js-color-preset-target--title_sub_headline_color'); ?>
+                          </li>
+                        </ul>
+                      </div>    
+            </div>   
+           <div class="custom_content tab_parent">
+                    <div class="custom_content_switch_target">
+                      <ul class="option_list">
+                        <li class="cf"><span class="label">
+                          <?php _e('Title Section Background Color', 'tcd-genesis'); ?>
+                          </span><?php echo tcd_color_option($options, 'title_bg_color', 'js-color-preset-target--title_bg_color'); ?>
+                        </li>
+                      </ul>
+                    </div>    
+           </div>    
+           <label class="custom_content_switch">
+                <h4>Title Section Image Position</h4> &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="label_wrap"><input name="dp_options[contents_builder][<?php echo $cb_index; ?>][position_of_image]"
+                    type="checkbox" value="1" <?php checked($value['position_of_image'], 1); ?>>
+                    <span class="label"><span class="on">Right</span><span class="sep"></span><span class="off">Left</span></span>
+                </div>
+            </label>
+      </div><!-- END .cb_content_switch_target -->
+
+
+    <?php
+
+
+      // Marquee Text　-------------------------------------------------------------
+    } else if ($cb_content_select == 'marquee_text') {
+
+      if (!isset($value['show_content'])) {
+        $value['show_content'] = 1;
+      }
+      if (!isset($value['text_marquee'])) {
+        $value['text_marquee'] = '';
+      }
+      ?>
+
+          <h3 class="cb_content_headline">
+          <?php _e('Marquee Text', 'tcd-genesis'); ?><span class="cb_content_headline_sub_title"></span>
+          </h3>
+          <label class="cb_content_switch">
+            <div class="label_wrap"><input name="dp_options[contents_builder][<?php echo $cb_index; ?>][show_content]"
+                type="checkbox" value="1" <?php checked($value['show_content'], 1); ?>><span class="label"><span
+                  class="on">ON</span><span class="sep"></span><span class="off">OFF</span></span></div>
+          </label>
+          <div class="cb_content tab_parent">
+
+            <div class="cb_content_switch_target">
+
+              <h4 class="theme_option_headline2">
+              <?php _e('Basic settings', 'tcd-genesis'); ?>
+              </h4>
+              <ul class="option_list">
+                <li class="cf"><span class="label">
+                  <?php _e('Text Information', 'tcd-genesis'); ?>
+                  </span><input type="text" class="cb-repeater-label full_width"
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][text_marquee]"
+                    value="<?php echo esc_attr($value['text_marquee']); ?>" /></li>
+                <li class="cf"><span class="label">
+                  <?php _e('', 'tcd-genesis'); ?>
+                  </span>
+                  <?php echo tcd_basic_radio_button($options, 'index_marquee_position', $marquee_position_type); ?>
+                  
+                </li>    
+              </ul>
+
+            </div><!-- END .cb_content_switch_target -->
+        
           <?php
       // サービス　-------------------------------------------------------------
     } elseif ($cb_content_select == 'service_list') {

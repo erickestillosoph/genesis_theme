@@ -44,6 +44,8 @@ function add_basic_dp_default_options($dp_default_options)
   $dp_default_options['super_headline_font_type'] = 'type2';
   $dp_default_options['super_headline_font_size'] = '120';
   $dp_default_options['super_headline_font_size_sp'] = '60';
+  $dp_default_options['tag_font_size'] = '24';
+  $dp_default_options['tag_font_size_sp'] = '14';
   $dp_default_options['headline_font_type'] = 'type2';
   $dp_default_options['headline_font_size'] = '70';
   $dp_default_options['headline_font_size_sp'] = '30';

@@ -149,7 +149,7 @@ function tcd_head()
         font-weight: 400;
       }
 
-      .super_large_headline {
+      .super_large_headline, .tags_text {
         font-family: var(--font_family_type1);
         font-weight: 400;
       }
@@ -160,7 +160,7 @@ function tcd_head()
         font-weight: 400;
       }
 
-      .super_large_headline {
+      .super_large_headline, .tags_text {
         font-family: var(--font_family_type2);
         font-weight: 400;
       }
@@ -171,7 +171,7 @@ function tcd_head()
         font-weight: 400;
       }
 
-      .super_large_headline {
+      .super_large_headline, .tags_text {
         font-family: var(--font_family_type3);
         font-weight: 400;
       }
