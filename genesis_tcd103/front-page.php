@@ -224,11 +224,10 @@ if ($options['index_content_type'] == 'type2') {
               </div>
             </section><!-- END .cb_design_content -->
             <?php
-            // Content Free Section --------------------------------------------------------------------------------
+            // Section Title Break --------------------------------------------------------------------------------
           } elseif ($content['cb_content_select'] == 'section_title_break' && $content['show_content']) {
             $headline = $content['headline1'];
             $sub_title = $content['sub_title'];
-            $logo_image = $content['logo_image'];
             $item_image = $content['item_image1'];
             $position_image = $content['position_of_image'];
             $title_bg_color = $options['title_bg_color'];
@@ -238,14 +237,14 @@ if ($options['index_content_type'] == 'type2') {
             <section class="title_break_style width_100 num<?php echo $content_count; ?>"
               id="<?php echo 'cb_content_' . $content_count; ?>">
               
-              <div class="title_break_section gap_40 cb_title_break_section inview align_items_center"  style="background-color:<?php echo $title_bg_color ?>">
+              <div class="title_break_section flex_1 width_title_break_container gap_40 cb_title_break_section inview align_items_center"  style="background-color:<?php echo $title_bg_color ?>">
                 
-                <div class="title_area align_items_center text_center<?php if (!$desc) {
+                <div class="title_area align_items_center  text_center<?php if (!$desc) {
                   echo ' no_desc';
                 }; ?><?php 
                       if(!$content['position_of_image']){ echo ' order_image'; }
                       elseif ($content['position_of_image']){ echo ' order_image_first'; }
-                    ?><?php if(!$item_image){ echo ' width_100 height_40 justify_content_center d_flex flex_direction_column'; } ?>">
+                    ?><?php if(!$item_image){ echo ' width_100 width_title_break_container justify_content_center d_flex flex_direction_column'; } ?>">
                   <?php if ($headline) { ?>
                     <h3 class="large_headline large_style" style="color: <?php echo $title_headline_color?> !important">
                       <span>
@@ -264,11 +263,11 @@ if ($options['index_content_type'] == 'type2') {
                 <?php if ($item_image) {
                         $item_image = wp_get_attachment_image_src($item_image, 'full');
                         ?>
-                        <div class="position_relative title_break_wh_100 inview image_animate_opacity
+                        <div class="position_relative width_title_break_container inview image_animate_opacity
                          ">
-                          <div class="position_relative title_break_wh_100">
-                            <img loading="lazy" class="image bdr_radius_24 title_break_wh_100 animate" src="<?php echo esc_attr($item_image[0]); ?>"
-                              width="<?php echo esc_attr($item_image[1]); ?>" height="<?php echo esc_attr($item_image[2]); ?>" />
+                          <div class="position_relative ">
+                            <img loading="lazy" class="image bdr_radius_24 image_height_auto animate object_fit_cover" src="<?php echo esc_attr($item_image[0]); ?>"
+                              width="100% " height="361" />
                           </div>
                         </div>
                 <?php } ?>
@@ -288,14 +287,11 @@ if ($options['index_content_type'] == 'type2') {
             $button_label = $content['button_label'];
             $button_url = $content['button_url'];
             $item_image = $content['item_image1'];
-            $link_label = $content['item_title1'];
-            $link_url = $content['item_url1'];
             $tag1 = $content['tag1'];
             $tag2 = $content['tag2'];
             $tag3 = $content['tag3'];
             $tag4 = $content['tag4'];
             $position_image = $content['position_of_image'];
-            $index_image_type = $options['index_image_position'];
             $tag_bg_color = $options['tag_bg_color'];
             ?>
             <div class="circle_custom_top">&nbsp;</div>
@@ -367,10 +363,10 @@ if ($options['index_content_type'] == 'type2') {
                           
                         ?>">
                           <div class="orange_image_background custom_image image position_absolute z_index_behind <?php if($content['position_of_image']){ echo ' top_right'; };if(!$content['position_of_image']){ echo ' top_left'; }; ?>" 
-                              style="width:<?php echo esc_attr($item_image[1]); ?>px; height:<?php echo esc_attr($item_image[2]); ?>px"></div>
+                              style="width:550px; height:400px"></div>
                           <div class="custom_image z_index_front position_relative<?php if(!$content['position_of_image']){ echo ' margin_right_30'; };?>">
-                            <img loading="lazy" class="image bdr_radius_24 box_shadow_image" src="<?php echo esc_attr($item_image[0]); ?>"
-                              width="<?php echo esc_attr($item_image[1]); ?>" height="<?php echo esc_attr($item_image[2]); ?>" />
+                            <img loading="lazy" class="image bdr_radius_24 box_shadow_image object_fit_cover" src="<?php echo esc_attr($item_image[0]); ?>"
+                              width="550" height="400" />
                           </div>
                         </div>
                 <?php } ?>
@@ -410,6 +406,86 @@ if ($options['index_content_type'] == 'type2') {
                   <?php }
                   ; ?>
               
+
+            </section><!-- END .cb_design_content -->
+            <div class="circle_custom_bottom">&nbsp;</div>
+
+            <?php
+            // Section Recruitment --------------------------------------------------------------------------------
+          } elseif ($content['cb_content_select'] == 'section_recruitment' && $content['show_content']) {
+            $super_headline = $content['super_headline'];
+            ?>
+            <div class="circle_custom_top">&nbsp;</div>
+            <section class="cb_design_content num<?php echo $content_count; ?>"
+              id="<?php echo 'cb_content_' . $content_count; ?>">
+
+              <div class="recruitment_header cb_recruitment_section_header inview">
+                <div class="title_area<?php if (!$desc) { echo ' no_desc'; }; ?>">
+                  <?php if ($super_headline) { ?>
+                    <h1 class="super_large_headline super_style"><span>
+                        <?php echo wp_kses_post(nl2br($super_headline)); ?>
+                      </span></h1>
+                  <?php }
+                  ; ?>
+                </div>
+                <!-- Continue -->
+                <div class="d_flex  flex_direction_recruitment gap_24">
+                  <?php
+                  for ($i = 1; $i <= 3; $i++):
+                    $item_title = $content['item_title' . $i];
+                    $desc = $content['desc' . $i];
+                    $desc_mobile = $content['desc_mobile' . $i];
+                    $item_image = $content['item_image' . $i];
+                    $button_label = $content['button_label' . $i];
+                    $button_url = $content['button_url' . $i];
+                    ?>
+                    <div class="margin_auto width_card height_card <?php if($i < 3){echo ' recruitment_card_style';}?>">
+                  
+                      <?php
+                      if ($item_image) {
+                        $item_image = wp_get_attachment_image_src($item_image, 'full');
+                        ?>
+                         <div class="object_fit_cover">
+                            <img loading="lazy" class="image_height_auto_recruitment object_fit_cover bdr_radius_top_24 " src="<?php echo esc_attr($item_image[0]); ?>"
+                              width="100%" height="240"   />
+                         </div>
+                      <?php }
+                      ; ?>
+                      <div class="recruitment_content_padding_16">
+                        <?php if ($item_title) { ?>
+                          <div class="text_center padding_title">
+                            <p class="sub_title">
+                              <?php echo esc_html($item_title); ?>
+                            </p>
+                          </div>
+                        <?php }
+                        ; ?>
+                        <?php if ($desc) { ?>
+                          <div class="text_center padding_desc">
+                            <p class="desc">
+                              <?php echo esc_html($desc); ?>
+                          </p>
+                          </div>
+                        <?php }
+                        ; ?>
+                        <?php if ($button_label && $button_url) { ?>
+                          <div class="padding_button">
+                            <div class="general_button ">
+                              <a href="<?php echo esc_url($button_url); ?>"><span class="label">
+                                  <?php echo esc_html($button_label); ?>
+                                </span><span class="arrow_full_button"></span></a>
+                            </div>
+                          </div>
+                        <?php }
+                        ; ?>
+                      </div>
+                    </div>
+                  <?php endfor; ?>
+
+                </div>
+                
+              </div>
+
 
             </section><!-- END .cb_design_content -->
             <div class="circle_custom_bottom">&nbsp;</div>
