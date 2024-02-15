@@ -139,9 +139,7 @@ function add_front_page_dp_default_options($dp_default_options)
       "item_headline1" => __('Headline', 'tcd-genesis'),
       "item_headline2" => __('Headline', 'tcd-genesis'),
       "item_title1" => __('Title', 'tcd-genesis'),
-      "item_title2" => __('Title', 'tcd-genesis'),
-      "item_url1" => "#",
-      "item_url2" => "#",
+
     ),
     array(
       "cb_content_select" => "section_title_break",
@@ -150,6 +148,26 @@ function add_front_page_dp_default_options($dp_default_options)
       "headline1" => 'COMPANY',
       "sub_title" => __('Subtitle', 'tcd-genesis'),
       "item_image" => "",
+    ),
+    array(
+      "cb_content_select" => "section_recruitment",
+      "show_content" => 1,
+      "super_headline" => 'OPPORTUNITY',
+      "item_title1" => __('Title', 'tcd-genesis'),
+      "item_title2" => __('Title', 'tcd-genesis'),
+      "item_title3" => __('Title', 'tcd-genesis'),
+      "desc1" => __('Description will be displayed here.', 'tcd-genesis'),
+      "desc2" => __('Description will be displayed here.', 'tcd-genesis'),
+      "desc3" => __('Description will be displayed here.', 'tcd-genesis'),
+      "desc_mobile1" => "",
+      "desc_mobile2" => "",
+      "desc_mobile3" => "",
+      "button_label1" => __('Link button', 'tcd-genesis'),
+      "button_label2" => __('Link button', 'tcd-genesis'),
+      "button_label3" => __('Link button', 'tcd-genesis'),
+      "button_url1" => "#",
+      "button_url2" => "#",
+      "button_url3" => "#",
     ),
     array(
       "cb_content_select" => "marquee_text",
@@ -630,6 +648,7 @@ function add_front_page_tab_panel($options)
         the_cb_content_setting('cb_cloneindex', 'free_space');
         the_cb_content_setting('cb_cloneindex', 'section_content_free');
         the_cb_content_setting('cb_cloneindex', 'section_title_break');
+        the_cb_content_setting('cb_cloneindex', 'section_recruitment');
         the_cb_content_setting('cb_cloneindex', 'marquee_text');
         ?>
       </div><!-- END .contents_builder-clone -->
@@ -822,7 +841,30 @@ function add_front_page_theme_options_validate($input)
         }
 
         $value['content_width'] = wp_filter_nohtml_kses($value['content_width']);
+        // Section Recruitment  -----------------------------------------------------------------------
+      }
+      elseif ($value['cb_content_select'] == 'section_recruitment') {
 
+        if (!isset($value['show_content']))
+          $value['show_content'] = null;
+        $value['show_content'] = ($value['show_content'] == 1 ? 1 : 0);
+
+        if (!isset($value['section_recruitment'])) {
+          $value['section_recruitment'] = null;
+        } else {
+          $value['section_recruitment'] = $value['section_recruitment'];
+        }
+        
+        $value['content_width'] = wp_filter_nohtml_kses($value['content_width']);
+
+        for ($i = 1; $i <= 3; $i++):
+          $value['item_title' . $i] = wp_filter_nohtml_kses($value['item_title' . $i]);
+          $value['desc' . $i] = wp_filter_nohtml_kses($value['desc' . $i]);
+          $value['desc_mobile' . $i] = wp_filter_nohtml_kses($value['desc_mobile' . $i]);
+          $value['item_image' . $i] = wp_filter_nohtml_kses($value['item_image' . $i]);
+          $value['button_label' . $i] = wp_filter_nohtml_kses($value['button_label' . $i]);
+          $value['button_url' . $i] = wp_filter_nohtml_kses($value['button_url' . $i]);
+        endfor;
         // Marquee Text -----------------------------------------------------------------------
       } 
       elseif ($value['cb_content_select'] == 'marquee_text') {
@@ -873,6 +915,7 @@ function the_cb_content_select($cb_index = 'cb_cloneindex', $selected = null)
     'free_space' => __('Free space', 'tcd-genesis'),
     'section_content_free' => __('Content Free', 'tcd-genesis'),
     'section_title_break' => __('Title Break', 'tcd-genesis'),
+    'section_recruitment' => __('Recruitment', 'tcd-genesis'),
     'marquee_text' => __('Marquee Text', 'tcd-genesis'),
   );
 
@@ -1094,7 +1137,7 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
         <?php
 
 
-      // Design Content Free　-------------------------------------------------------------
+      // Section Content Free　-------------------------------------------------------------
     } else if ($cb_content_select == 'section_content_free') {
 
       if (!isset($value['show_content'])) {
@@ -1218,9 +1261,9 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
                 <ul class="option_list">
                   <li class="cf">
                     <span class="label">
-                    <?php _e('Background image', 'tcd-genesis'); ?>
+                    <?php _e('Image', 'tcd-genesis'); ?>
                       <span class="recommend_desc">
-                      <?php printf(__('Recommend image size. Width:%1$spx, Height:%2$spx.', 'tcd-genesis'), '623', '450'); ?>
+                      <?php printf(__('Recommend image size. Width:%1$spx, Height:%2$spx.', 'tcd-genesis'), '550', '400'); ?>
                       </span>
                     </span>
                     <div class="image_box cf">
@@ -1229,7 +1272,7 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
                           id="dc_bg_image_<?php echo $cb_index; ?>"
                           name="dp_options[contents_builder][<?php echo $cb_index; ?>][item_image1]" class="cf_media_id">
                         <div class="preview_field">
-                        <?php if ($value['item_image']) {
+                        <?php if ($value['item_image1']) {
                           echo wp_get_attachment_image($value['item_image1'], 'medium');
                         }
                         ; ?>
@@ -1302,11 +1345,153 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
                     </div>  
                  </div> 
             </div><!-- END .cb_content_switch_target -->
+            <?php
+
+
+// Section Recruitment Free　-------------------------------------------------------------
+} else if ($cb_content_select == 'section_recruitment') {
+
+if (!isset($value['show_content'])) {
+  $value['show_content'] = 1;
+}
+if (!isset($value['super_headline'])) {
+  $value['super_headline'] = '';
+}
+
+for ($i = 1; $i <= 3; $i++):
+  if (!isset($value['item_title' . $i])) {
+    $value['item_title' . $i] = '';
+  }
+  if (!isset($value['desc' . $i])) {
+    $value['desc' . $i] = '';
+  }
+  if (!isset($value['desc_mobile' . $i])) {
+    $value['desc_mobile' . $i] = '';
+  }
+  if (!isset($value['button_label' . $i])) {
+    $value['button_label' . $i] = '';
+  }
+  if (!isset($value['button_url' . $i])) {
+    $value['button_url' . $i] = '';
+  }
+  if (!isset($value['item_image' . $i])) {
+    $value['item_image' . $i] = '';
+  }
+endfor;
+
+?>
+
+    <h3 class="cb_content_headline">
+    <?php _e('Recruitment ', 'tcd-genesis'); ?><span class="cb_content_headline_sub_title"></span>
+    </h3>
+    <label class="cb_content_switch">
+      <div class="label_wrap"><input name="dp_options[contents_builder][<?php echo $cb_index; ?>][show_content]"
+          type="checkbox" value="1" <?php checked($value['show_content'], 1); ?>><span class="label"><span
+            class="on">ON</span><span class="sep"></span><span class="off">OFF</span></span></div>
+    </label>
+    <div class="cb_content tab_parent">
+
+      <div class="cb_content_switch_target">
+
+        <h4 class="theme_option_headline2">
+        <?php _e('Basic settings', 'tcd-genesis'); ?>
+        </h4>
+        <ul class="option_list">
+          <li class="cf"><span class="label">
+            <?php _e('Super Headline', 'tcd-genesis'); ?>
+            </span><input type="text" class="cb-repeater-label full_width"
+              name="dp_options[contents_builder][<?php echo $cb_index; ?>][super_headline]"
+              value="<?php echo esc_attr($value['super_headline']); ?>" /></li>
+        </ul>
+
+        <h4 class="theme_option_headline_number">
+          <?php _e('Image', 'tcd-genesis'); ?>
+        </h4>
+        <div class="sub_box_tab">
+            <div class="tab active" data-tab="tab1">
+              <?php _e('Opportunity 1', 'tcd-genesis'); ?>
+            </div>
+            <div class="tab" data-tab="tab2">
+              <?php _e('Opportunity 2', 'tcd-genesis'); ?>
+            </div>
+            <div class="tab" data-tab="tab3">
+              <?php _e('Explore tab', 'tcd-genesis'); ?>
+            </div>
+          </div>
+
+          <?php for ($i = 1; $i <= 3; $i++): ?>
+            <div class="sub_box_tab_content<?php if ($i == 1) {
+              echo ' active';
+            }
+            ; ?>" data-tab-content="tab<?php echo $i; ?>">
+
+              <ul class="option_list">
+                <li class="cf"><span class="label">
+                    <?php _e('Opportunity Title', 'tcd-genesis'); ?>
+                  </span><input type="text" class="full_width"
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][item_title<?php echo $i; ?>]"
+                    value="<?php echo esc_attr($value['item_title' . $i]); ?>" /></li>
+                <li class="cf">
+                  <span class="label">
+                    <?php _e('Image', 'tcd-genesis'); ?>
+                    <span class="recommend_desc">
+                      <?php printf(__('Recommend image size. Width:%1$spx, Height:%2$spx.', 'tcd-genesis'), '420', '240'); ?>
+                    </span>
+                  </span>
+                  <div class="image_box cf">
+                    <div class="cf cf_media_field hide-if-no-js dc_bg_image_<?php echo $cb_index; ?>_<?php echo $i; ?>">
+                      <input type="hidden" value="<?php echo esc_attr($value['item_image' . $i]); ?>"
+                        id="dc_bg_image_<?php echo $cb_index; ?>_<?php echo $i; ?>"
+                        name="dp_options[contents_builder][<?php echo $cb_index; ?>][item_image<?php echo $i; ?>]"
+                        class="cf_media_id">
+                      <div class="preview_field">
+                        <?php if ($value['item_image' . $i]) {
+                          echo wp_get_attachment_image($value['item_image' . $i], 'medium');
+                        }
+                        ; ?>
+                      </div>
+                      <div class="buttton_area">
+                        <input type="button" value="<?php _e('Select Image', 'tcd-genesis'); ?>"
+                          class="cfmf-select-img button">
+                        <input type="button" value="<?php _e('Remove Image', 'tcd-genesis'); ?>" class="cfmf-delete-img button <?php if (!$value['item_image' . $i]) {
+                             echo 'hidden';
+                           }
+                           ; ?>">
+                      </div>
+                    </div>
+                  </div>
+                </li> 
+                <li class="cf"><span class="label">
+                    <?php _e('Description', 'tcd-genesis'); ?>
+                  </span><input type="text" class="full_width"
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][desc<?php echo $i; ?>]"
+                    value="<?php echo esc_attr($value['desc' . $i]); ?>" /></li>
+                <li class="cf"><span class="label">
+                    <?php _e('Description Mobile', 'tcd-genesis'); ?>
+                  </span><input type="text" class="full_width"
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][desc_mobile<?php echo $i; ?>]"
+                    value="<?php echo esc_attr($value['desc_mobile' . $i]); ?>" /></li>
+                <li class="cf"><span class="label">
+                    <?php _e('Button label', 'tcd-genesis'); ?>
+                  </span><input type="text" class="full_width"
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][button_label<?php echo $i; ?>]"
+                    value="<?php echo esc_attr($value['button_label' . $i]); ?>" /></li>
+                <li class="cf"><span class="label">
+                    <?php _e('Button URL', 'tcd-genesis'); ?>
+                  </span><input type="text" class="full_width"
+                    name="dp_options[contents_builder][<?php echo $cb_index; ?>][button_url<?php echo $i; ?>]"
+                    value="<?php echo esc_attr($value['button_url' . $i]); ?>" /></li>
+              </ul>
+
+            </div><!-- END .sub_box_tab_content -->
+          <?php endfor; ?>
+
+      </div><!-- END .cb_content_switch_target -->
 
             <?php
 
 
-// Design Content Free　-------------------------------------------------------------
+// Sectio Title Break　-------------------------------------------------------------
 } else if ($cb_content_select == 'section_title_break') {
 
 if (!isset($value['show_content'])) {
@@ -1365,7 +1550,7 @@ if (!isset($value['item_image1'])) {
               <span class="label">
               <?php _e('Title Image', 'tcd-genesis'); ?>
                 <span class="recommend_desc">
-                <?php printf(__('Recommend image size. Width:%1$spx, Height:%2$spx.', 'tcd-genesis'), '623', '450'); ?>
+                <?php printf(__('Recommend image size. Width:%1$spx, Height:%2$spx.', 'tcd-genesis'), '570', '360'); ?>
                 </span>
               </span>
               <div class="image_box cf">
