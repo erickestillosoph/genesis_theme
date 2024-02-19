@@ -91,9 +91,12 @@
         // カテゴリーページを表示する場合
         if($archive_service_type == 'type1'){
     ?>
-    <div class="design_arrow_button">
-     <a href="<?php echo esc_url($cat_url); ?>"><span class="label"><?php if($sub_title){ echo esc_html($sub_title); } else { echo esc_html($cat_name); }; ?></span><span class="arrow_button"></span></a>
-    </div>
+    
+                 <div class="design_full_button justify_content_end d_flex cb_design_full_button">
+                    <a href="<?php echo esc_url($cat_url); ?>"><span class="label">
+                        <?php echo esc_html($sub_title); ?>
+                      </span><span class="arrow_full_button"></span></a>
+                  </div>
     <?php }; ?>
 
    </div>
