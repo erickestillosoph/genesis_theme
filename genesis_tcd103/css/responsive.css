@@ -280,9 +280,9 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
 
 
 /* お知らせ一覧 */
-.news_carousel_wrap { padding:0 60px !important; }
+.news_carousel_wrap { padding:0 120px !important; }
 @media screen and (max-width:1100px) {
-	.news_carousel_wrap { height:190px; padding:0 40px !important; }
+	.news_carousel_wrap { height:190px; padding:0 120px !important; }
   .news_carousel .item { width:440px; height:190px; padding:30px; }
 	.news_carousel .image_link { width:130px; height:130px; }
 	.news_carousel .content { width:calc(100% - 130px); padding:0 0 0 30px; }
@@ -294,7 +294,7 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
 @media screen and (max-width:800px) {
 	.cb_news_list { padding:40px 0; }
 	.cb_news_list .design_header { margin-bottom:40px; }
-	.news_carousel_wrap { height:195px; padding:0 20px !important; }
+	.news_carousel_wrap { height:195px; padding:0 100px !important; }
 	.news_carousel_wrap + .genesis_carousel_scrollbar .swiper-scrollbar { margin-top:40px !important; }
 	.news_carousel_cat_all_wrap + .genesis_carousel_scrollbar .swiper-scrollbar { margin-top:40px !important; }
 	.cb_news_list .cb_design_arrow_button { margin-top:35px; }
@@ -358,6 +358,10 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
 	body.hide_breadcrumb #container { padding-top:15px; }
 }
 
+/* LP Logo Size Mobile */
+@media screen and (max-width:1100px) {
+  img.logo_image.mobile{ height: 24px; }
+}
 
 /* LPページ */
 #lp_page_header .catch { max-width:inherit; padding:0 60px; }
@@ -643,7 +647,7 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
   .news_category_button li:last-of-type { margin-right:0; }
 	.news_category_button a { height:40px; line-height:40px; padding:0 20px; font-size:14px; }
   #archive_news { padding:0 40px 150px; }
-  .news_list { display:block; width:auto; }
+  .news_list { display:block; width:auto; gap: 20px; display: grid; padding: 0px 10px ;}
 	.news_list .item { width:auto; margin:0 0 -1px 0; }
 }
 @media screen and (max-width:800px) {
@@ -1129,8 +1133,8 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 
 
 /* ロゴエリア */
-#footer { border-top:1px solid #ddd; }
-#footer_inner { max-width:inherit; padding:100px 60px; }
+/* #footer { border-top:1px solid #ddd; } */
+#footer_inner { max-width:inherit; padding:150px 60px; }
 @media screen and (max-width:1100px) {
   #footer_inner { padding:80px 40px; }
 }

@@ -514,6 +514,7 @@ jQuery(function ($) {
     var bgColor = $(this).data("bg-color");
     var secondaryColor = $(this).data("secondary-color");
     var tertiaryColor = $(this).data("tertiary-color");
+    var neutralColor = $(this).data("neutral-color");
 
     $(this).siblings().removeClass("is-active");
     $(this).addClass("is-active");
@@ -522,9 +523,21 @@ jQuery(function ($) {
     $(".js-color-preset-target--bg").wpColorPicker("color", bgColor);
     $(".js-color-preset-target--tag_bg_color").wpColorPicker(
       "color",
-      tertiaryColor
+      secondaryColor
     );
     $(".js-color-preset-target--title_bg_color").wpColorPicker(
+      "color",
+      tertiaryColor
+    );
+    $(".js-color-preset-target--footer_overlay_color").wpColorPicker(
+      "color",
+      neutralColor
+    );
+    $(".js-color-preset-target--footer_logo_background_color").wpColorPicker(
+      "color",
+      neutralColor
+    );
+    $(".js-color-preset-target--footer_panel_background_color").wpColorPicker(
       "color",
       tertiaryColor
     );

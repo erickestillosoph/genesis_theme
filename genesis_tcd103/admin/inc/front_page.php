@@ -139,7 +139,7 @@ function add_front_page_dp_default_options($dp_default_options)
       "item_headline1" => __('Headline', 'tcd-genesis'),
       "item_headline2" => __('Headline', 'tcd-genesis'),
       "item_title1" => __('Title', 'tcd-genesis'),
-
+      "animation_trigger" => 1,
     ),
     array(
       "cb_content_select" => "section_title_break",
@@ -1146,6 +1146,9 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
       if (!isset($value['show_tags'])) {
         $value['show_tags'] = 1;
       }
+      if (!isset($value['animation_trigger'])) {
+        $value['animation_trigger'] = 1;
+      }
       if (!isset($value['position_of_image'])) {
         $value['position_of_image'] = 1;
       }
@@ -1262,9 +1265,6 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
                   <li class="cf">
                     <span class="label">
                     <?php _e('Image', 'tcd-genesis'); ?>
-                      <span class="recommend_desc">
-                      <?php printf(__('Recommend image size. Width:%1$spx, Height:%2$spx.', 'tcd-genesis'), '550', '400'); ?>
-                      </span>
                     </span>
                     <div class="image_box cf">
                       <div class="cf cf_media_field hide-if-no-js dc_bg_image_<?php echo $cb_index; ?>">
@@ -1298,6 +1298,13 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
                           <span class="label"><span class="on">Right</span><span class="sep"></span><span class="off">Left</span></span>
                       </div>
                   </label>
+                 <label class="custom_content_switch">
+                    <h4>Animation of the Background</h4> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="label_wrap"><input name="dp_options[contents_builder][<?php echo $cb_index; ?>][animation_trigger]"
+                        type="checkbox" value="1" <?php checked($value['animation_trigger'], 1); ?>>
+                        <span class="label"><span class="on">ON</span><span class="sep"></span><span class="off">OFF</span></span>
+                    </div>
+                 </label>  
                 <label class="custom_content_switch">
                     <h4>Tags Visibility</h4> &nbsp;&nbsp;&nbsp;&nbsp;
                     <div class="label_wrap"><input name="dp_options[contents_builder][<?php echo $cb_index; ?>][show_tags]"
@@ -1305,6 +1312,7 @@ function the_cb_content_setting($cb_index = 'cb_cloneindex', $cb_content_select 
                         <span class="label"><span class="on">ON</span><span class="sep"></span><span class="off">OFF</span></span>
                     </div>
                  </label>
+               
                  <div class="custom_content tab_parent">
                     <div class="custom_content_switch_target">
                       <ul class="option_list">

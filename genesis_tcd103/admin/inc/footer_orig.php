@@ -41,33 +41,7 @@ function add_footer_dp_default_options( $dp_default_options ) {
 	}
 	$dp_default_options['footer_banner_title_font_size'] = '50';
 	$dp_default_options['footer_banner_title_font_size_sp'] = '30';
-  
 
-  // Footer images such as background image, logo, and additional image
-  $dp_default_options['footer_background_image'] = false;
-  $dp_default_options['footer_logo_image'] = false;
-  $dp_default_options['footer_additional_image'] = false;
-  $dp_default_options['footer_overlay_color'] = '#ffffff';
-  $dp_default_options['footer_panel_background_color'] = '#1A202C';
-  $dp_default_options['footer_logo_background_color'] = '#ffffff';
-  $dp_default_options['footer_heading'] = '';
-  $dp_default_options['footer_subheading'] = '';
-  $dp_default_options['footer_additional_text'] = '';
-  $dp_default_options['footer_heading_text_color'] = '#ffffff';
-  $dp_default_options['footer_subheading_text_color'] = '#ffffff';
-  $dp_default_options['footer_additional_text_color'] = '#ffffff';
-  $dp_default_options['footer_navigation_links_text_color'] = '#ffffff';
-  $dp_default_options['footer_button_bg_color'] = '#ffffff';
-
-  for ( $i = 1; $i <= 2; $i++ ) {
-		$dp_default_options['footer_button_label'.$i] = __( 'Button Label', 'tcd-genesis' );
-		$dp_default_options['footer_button_url'.$i] = '#';
-	}  
-  $dp_default_options['footer_heading_font_size'] = '40';
-	$dp_default_options['footer_heading_font_size_sp'] = '24';
-  $dp_default_options['footer_subheading_font_size'] = '24';
-	$dp_default_options['footer_subheading_font_size_sp'] = '16';
-  
 	// 住所
   $dp_default_options['footer_address'] = __( 'Footer information will be display here', 'tcd-genesis' );
 
@@ -176,198 +150,29 @@ function add_footer_tab_panel( $options ) {
     <h3 class="theme_option_headline"><?php _e('Footer information area', 'tcd-genesis');  ?></h3>
     <div class="theme_option_field_ac_content">
 
+     <div class="front_page_image">
+      <img src="<?php echo esc_url(get_template_directory_uri()); ?>/admin/img/footer_info_image.jpg" alt="" title="" />
+     </div>
+
      <h4 class="theme_option_headline_number"><span class="num">1</span><?php _e( 'Logo', 'tcd-genesis' ); ?></h4>
      <div class="theme_option_message2">
       <p><?php echo __('You can set logo from "Basic Settings" logo section.', 'tcd-genesis'); ?></p>
      </div>
-     
 
-      <div class="">
-        <ul class="option_list">
-        <li class="cf">
-        <span class="label">
-         <span class="num">2</span>
-         <?php _e('Background Image', 'tcd-genesis'); ?>
-        </span>
-        <div class="image_box cf">
-         <div class="cf cf_media_field hide-if-no-js ">
-          <input type="hidden" value="<?php echo esc_attr( $options['footer_background_image'] ); ?>" id="footer_background_image" name="dp_options[footer_background_image]" class="cf_media_id">
-          <div class="preview_field"><?php if($options['footer_background_image']){ echo wp_get_attachment_image($options['footer_background_image'], 'medium'); }; ?></div>
-          <div class="buttton_area">
-           <input type="button" value="<?php _e('Select Image', 'tcd-genesis'); ?>" class="cfmf-select-img button">
-           <input type="button" value="<?php _e('Remove Image', 'tcd-genesis'); ?>" class="cfmf-delete-img button <?php if(!$options['footer_background_image']){ echo 'hidden'; }; ?>">
-          </div>
-         </div>
-        </div>
-       </li>
-        </ul>
-      </div>
-      <div class="">
-        <div class="custom_content_switch_target">
-          <ul class="option_list">
-            <li class="cf"><span class="label">
-              <?php _e('Title Section Background Color', 'tcd-genesis'); ?>
-              </span><?php echo tcd_color_option($options, 'footer_overlay_color', 'js-color-preset-target--footer_overlay_color'); ?>
-            </li>
-          </ul>
-        </div>    
-      </div> 
-      <div class="">
-        <div class="custom_content_switch_target">
-          <ul class="option_list">
-            <li class="cf"><span class="label">
-              <?php _e('Panel Background Color', 'tcd-genesis'); ?>
-              </span><?php echo tcd_color_option($options, 'footer_panel_background_color', 'js-color-preset-target--footer_panel_background_color'); ?>
-            </li>
-          </ul>
-        </div>    
-      </div> 
-      <div class="">
-        <div class="custom_content_switch_target">
-          <ul class="option_list">
-            <li class="cf"><span class="label">
-              <?php _e('Logo Panel Background Color', 'tcd-genesis'); ?>
-              </span><?php echo tcd_color_option($options, 'footer_logo_background_color', 'js-color-preset-target--footer_logo_background_color'); ?>
-            </li>
-          </ul>
-        </div>    
-      </div> 
-      <div class="">
-        <ul class="option_list">
-        <li class="cf">
-        <span class="label">
-         <span class="num">3</span>
-         <?php _e('Logo Image', 'tcd-genesis'); ?>
-        </span>
-        <div class="image_box cf">
-         <div class="cf cf_media_field hide-if-no-js ">
-          <input type="hidden" value="<?php echo esc_attr( $options['footer_logo_image'] ); ?>" id="footer_logo_image" name="dp_options[footer_logo_image]" class="cf_media_id">
-          <div class="preview_field"><?php if($options['footer_logo_image']){ echo wp_get_attachment_image($options['footer_logo_image'], 'medium'); }; ?></div>
-          <div class="buttton_area">
-           <input type="button" value="<?php _e('Select Image', 'tcd-genesis'); ?>" class="cfmf-select-img button">
-           <input type="button" value="<?php _e('Remove Image', 'tcd-genesis'); ?>" class="cfmf-delete-img button <?php if(!$options['footer_logo_image']){ echo 'hidden'; }; ?>">
-          </div>
-         </div>
-        </div>
-       </li>
-        </ul>
-      </div>
-      <div class="">
-        <ul class="option_list">
-        <li class="cf">
-        <span class="label">
-         <span class="num">4</span>
-         <?php _e('Additional Footer Image', 'tcd-genesis'); ?>
-        </span>
-        <div class="image_box cf">
-         <div class="cf cf_media_field hide-if-no-js ">
-          <input type="hidden" value="<?php echo esc_attr( $options['footer_additional_image'] ); ?>" id="footer_additional_image" name="dp_options[footer_additional_image]" class="cf_media_id">
-          <div class="preview_field"><?php if($options['footer_additional_image']){ echo wp_get_attachment_image($options['footer_additional_image'], 'medium'); }; ?></div>
-          <div class="buttton_area">
-           <input type="button" value="<?php _e('Select Image', 'tcd-genesis'); ?>" class="cfmf-select-img button">
-           <input type="button" value="<?php _e('Remove Image', 'tcd-genesis'); ?>" class="cfmf-delete-img button <?php if(!$options['footer_additional_image']){ echo 'hidden'; }; ?>">
-          </div>
-         </div>
-        </div>
-       </li>
-        </ul>
-      </div>
-
-      <h4 class="theme_option_headline_number"><span class="num">5</span><?php _e( 'Footer Additional Info', 'tcd-genesis' ); ?></h4>
-      <input class="full_width" type="text" name="dp_options[footer_additional_text]" value="<?php echo esc_attr( $options['footer_additional_text'] ); ?>" />
-      <div class="">
-        <ul class="option_list">
-          <li class="cf">
-              <span class="label">
-                <?php _e('Additional Text Color', 'tcd-genesis'); ?>
-              </span><?php echo tcd_color_option($options, 'footer_additional_text_color', 'js-color-preset-target--footer_additional_text_color'); ?>
-          </li>
-
-        </ul>
-      </div>
-      <div class="">
-        <ul class="option_list">
-          <li class="cf">
-              <span class="label">
-                <?php _e('Navigation Links Text Color', 'tcd-genesis'); ?>
-              </span><?php echo tcd_color_option($options, 'footer_navigation_links_text_color', 'js-color-preset-target--footer_navigation_links_text_color'); ?>
-          </li>
-
-        </ul>
-      </div>
-     <h4 class="theme_option_headline_number"><span class="num">6</span><?php _e( 'Footer information', 'tcd-genesis' ); ?></h4>
+     <h4 class="theme_option_headline_number"><span class="num">2</span><?php _e( 'Footer information', 'tcd-genesis' ); ?></h4>
      <textarea class="large-text" cols="50" rows="3" name="dp_options[footer_address]" placeholder="<?php _e( 'You can enter your company (store) name and address here, as well as your catchphrase.', 'tcd-genesis' ); ?>"><?php echo esc_textarea(  $options['footer_address'] ); ?></textarea>
-     
-     <h4 class="theme_option_headline_number"><span class="num">7</span><?php _e( 'Heading Text', 'tcd-genesis' ); ?></h4>
-     <input class="full_width" type="text" name="dp_options[footer_heading]" value="<?php echo esc_attr( $options['footer_heading'] ); ?>" />
-     <div class="">
-        <ul class="option_list">
-          <li class="cf">
-              <span class="label">
-                <?php _e('Heading Text Color', 'tcd-genesis'); ?>
-              </span><?php echo tcd_color_option($options, 'footer_heading_text_color', 'js-color-preset-target--footer_heading_text_color'); ?>
-          </li>
-        </ul>
-      </div>
-      <ul class="option_list">
-        <li class="cf"><span class="label"><?php _e('Font size of heading', 'tcd-genesis'); ?></span><?php echo tcd_font_size_option($options, 'footer_heading_font_size'); ?></li>
-     </ul>
-      <h4 class="theme_option_headline2"><?php _e('Other setting', 'tcd-genesis'); ?></h4>
-     
- 
-     <h4 class="theme_option_headline_number"><span class="num">8</span><?php _e( 'Subheading Text', 'tcd-genesis' ); ?></h4>
-     <input class="full_width" type="text" name="dp_options[footer_subheading]" value="<?php echo esc_attr( $options['footer_subheading'] ); ?>" />
-     <div class="">
-        <ul class="option_list">
-          <li class="cf">
-              <span class="label">
-                <?php _e('Subheading Text Color', 'tcd-genesis'); ?>
-              </span><?php echo tcd_color_option($options, 'footer_subheading_text_color', 'js-color-preset-target--footer_subheading_text_color'); ?>
-          </li>
 
-        </ul>
-      </div>
-      <ul class="option_list">
-        <li class="cf"><span class="label"><?php _e('Font size of subheading', 'tcd-genesis'); ?></span><?php echo tcd_font_size_option($options, 'footer_subheading_font_size'); ?></li>
-     </ul> 
-
-     <!-- Here is the code -->
-
-     <div class="">
-        <ul class="option_list">
-          <li class="cf">
-              <span class="label">
-                <?php _e('Background Button Color on Hover', 'tcd-genesis'); ?>
-              </span><?php echo tcd_color_option($options, 'footer_button_bg_color', 'js-color-preset-target--footer_button_bg_color'); ?>
-          </li>
-
-        </ul>
-      </div>
-    <?php for($i = 1; $i <= 2; $i++) : ?>
-
-        <ul class="option_list">
- 
-        <li class="cf"><span class="label"><span class="num">A.<?php echo $i; ?></span><?php _e('Button Label', 'tcd-genesis'); ?></span><input class="full_width" type="text" name="dp_options[footer_button_label<?php echo $i; ?>]" value="<?php esc_attr_e( $options['footer_button_label'.$i] ); ?>" /></li>
-        <li class="cf">
-          <span class="label"><span class="num">B.<?php echo $i; ?></span><?php _e('Button URL', 'tcd-genesis'); ?></span>
-          <div class="admin_link_option">
-          <input type="text" name="dp_options[footer_button_url<?php echo $i; ?>]" placeholder="https://example.com/" value="<?php echo esc_attr( $options['footer_button_url'.$i] ); ?>">
-          </div>
-        </li>
-      </ul>
-    <?php endfor; ?>
-
-     <h4 class="theme_option_headline_number"><span class="num">9</span><?php _e( 'SNS icon', 'tcd-genesis' ); ?></h4>
+     <h4 class="theme_option_headline_number"><span class="num">3</span><?php _e( 'SNS icon', 'tcd-genesis' ); ?></h4>
      <div class="theme_option_message2">
       <p><?php _e( 'SNS icons can be set in basic settings. The specifications are displayed in the following locations.<br><br>Footer menu area (PC/Mobile)<br>Lower part of the drawer menu (Mobile only)', 'tcd-genesis' ); ?></p>
      </div>
 
-     <h4 class="theme_option_headline_number"><span class="num">10</span><?php _e( 'Menu', 'tcd-genesis' ); ?></h4>
+     <h4 class="theme_option_headline_number"><span class="num">4</span><?php _e( 'Menu', 'tcd-genesis' ); ?></h4>
      <div class="theme_option_message2">
       <p><?php echo __('Please set menu from <a href="./nav-menus.php" target="_blank">"Menu Screen"</a> in theme menu.', 'tcd-genesis'); ?></p>
      </div>
 
-     <h4 class="theme_option_headline_number"><span class="num">11</span><?php _e( 'Copyright', 'tcd-genesis' ); ?></h4>
+     <h4 class="theme_option_headline_number"><span class="num">5</span><?php _e( 'Copyright', 'tcd-genesis' ); ?></h4>
      <input class="full_width" type="text" name="dp_options[copyright]" value="<?php echo esc_attr( $options['copyright'] ); ?>" />
 
      <ul class="button_list cf">
@@ -591,33 +396,7 @@ function add_footer_theme_options_validate( $input ) {
   }
   $input['footer_banner_title_font_size'] = wp_filter_nohtml_kses( $input['footer_banner_title_font_size'] );
 
-  // Footer images such as background, logo, and additional image
-  $input['footer_background_image'] = wp_filter_nohtml_kses( $input['footer_background_image'] );
-  $input['footer_logo_image'] = wp_filter_nohtml_kses( $input['footer_logo_image'] );
-  $input['footer_additional_image'] = wp_filter_nohtml_kses( $input['footer_additional_image'] );
-  // Footer color picker
-  $input['footer_overlay_color'] = sanitize_hex_color($input['footer_overlay_color']);
-  $input['footer_panel_background_color'] = sanitize_hex_color($input['footer_panel_background_color']);
-  $input['footer_logo_background_color'] = sanitize_hex_color($input['footer_logo_background_color']);
-  $input['footer_heading_text_color'] = sanitize_hex_color($input['footer_heading_text_color']);
-  $input['footer_subheading_text_color'] = sanitize_hex_color($input['footer_subheading_text_color']);
-  $input['footer_additional_text_color'] = sanitize_hex_color($input['footer_additional_text_color']);
-  $input['footer_navigation_links_text_color'] = sanitize_hex_color($input['footer_navigation_links_text_color']);
-  $input['footer_button_bg_color'] = sanitize_hex_color($input['footer_button_bg_color']);
-  // Footer Headings, subheading, button label, button url
-  $input['footer_heading'] = wp_filter_nohtml_kses($input['footer_heading']);
-  $input['footer_subheading'] = wp_filter_nohtml_kses($input['footer_subheading']);
-  $input['footer_additional_text'] = wp_filter_nohtml_kses($input['footer_additional_text']);
-  // Font size of the heading and subheading
-  $input['footer_heading_font_size'] = wp_filter_nohtml_kses( $input['footer_heading_font_size'] );
-  $input['footer_heading_font_size_sp'] = wp_filter_nohtml_kses( $input['footer_heading_font_size_sp'] );
-  $input['footer_subheading_font_size'] = wp_filter_nohtml_kses( $input['footer_subheading_font_size'] );
-  $input['footer_subheading_font_size_sp'] = wp_filter_nohtml_kses( $input['footer_subheading_font_size_sp'] );
 
-  for ( $i = 1; $i <= 2; $i++ ) {
-    $input['footer_button_label'.$i] = wp_filter_nohtml_kses( $input['footer_button_label'.$i] );
-    $input['footer_button_url'.$i] = wp_filter_nohtml_kses( $input['footer_button_url'.$i] );
-  }
   // 住所
   $input['footer_address'] = wp_kses_post($input['footer_address']);
 

@@ -149,7 +149,7 @@ function tcd_head()
         font-weight: 400;
       }
 
-      .super_large_headline, .tags_text {
+      .super_large_headline, .tags_text, .footer_heading_font_size {
         font-family: var(--font_family_type1);
         font-weight: 400;
       }
@@ -160,7 +160,7 @@ function tcd_head()
         font-weight: 400;
       }
 
-      .super_large_headline, .tags_text {
+      .super_large_headline, .tags_text, .footer_heading_font_size {
         font-family: var(--font_family_type2);
         font-weight: 400;
       }
@@ -171,7 +171,7 @@ function tcd_head()
         font-weight: 400;
       }
 
-      .super_large_headline, .tags_text {
+      .super_large_headline, .tags_text, .footer_heading_font_size {
         font-family: var(--font_family_type3);
         font-weight: 400;
       }
@@ -265,6 +265,10 @@ function tcd_head()
     // フッター -------------------------------------------------------------------------------
     $footer_banner_title_font_size = $options['footer_banner_title_font_size'] ? $options['footer_banner_title_font_size'] : '50';
     $footer_banner_title_font_size_sp = $options['footer_banner_title_font_size_sp'] ? $options['footer_banner_title_font_size_sp'] : '30';
+
+    // Footer Text
+    $footer_heading_text_size = $options['footer_heading_text_size'] ? $options['footer_heading_text_size'] : '50';
+    $footer_subheading_text_size = $options['footer_subheading_text_size'] ? $options['footer_subheading_text_size'] : '30';
     ?>
     #footer_banner .title {
       font-size:<?php echo esc_html($footer_banner_title_font_size); ?>px !important;

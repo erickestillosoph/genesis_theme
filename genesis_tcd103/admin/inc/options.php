@@ -599,6 +599,11 @@ $slider_layout_options = array(
     'value' => 'type3',
     'label' => __( 'Type3', 'tcd-genesis' ),
     'image' => get_template_directory_uri() . '/admin/img/slider_type3.jpg'
+  ),
+  'type4' => array(
+    'value' => 'type4',
+    'label' => __( 'Type4', 'tcd-genesis' ),
+    'image' => get_template_directory_uri() . '/admin/img/slider_type3.jpg'
   )
 );
 
