@@ -548,6 +548,7 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
 @media screen and (max-width:1100px) {
   .service_category_post_list { padding:0 40px; }
 }
+
 @media screen and (max-width:950px) {
 	.service_category_post_list { display:block; }
 	.service_category_post_list .item { width:auto; margin:0 0 -1px 0; }
