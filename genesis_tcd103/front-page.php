@@ -34,7 +34,8 @@ get_header();
         font-size:<?php echo esc_html($tag_font_size_sp); ?>px !important;
       }
     }
-</style>    
+</style>  
+<script></script>
 <?php
 // 通常のコンテンツを読み込む ------------------------------------------------------------------------------
 if ($options['index_content_type'] == 'type2') {
@@ -362,8 +363,8 @@ if ($options['index_content_type'] == 'type2') {
                           elseif ($content['position_of_image']){ echo ' image_animate_right'; }
                           
                         ?>">
-                          <div class="orange_image_background custom_image image position_absolute z_index_behind <?php if($content['position_of_image']){ echo ' top_right'; };if(!$content['position_of_image']){ echo ' top_left'; }; ?>" 
-                              style="width:550px; height:400px"></div>
+                          <div id="" class="orange_image_background custom_image image position_absolute z_index_behind <?php if($content['position_of_image'] && !$content['animation_trigger']){ echo 'top_right'; };if(!$content['position_of_image'] && !$content['animation_trigger']){ echo 'top_left'; }; if(!$content['position_of_image'] && $content['animation_trigger']){ echo ' top_left top_left_animation'; }; if($content['position_of_image'] && $content['animation_trigger']){ echo ' top_right top_right_animation'; };?>" 
+                              style="width:550px; height:400px" ></div>
                           <div class="custom_image z_index_front position_relative<?php if(!$content['position_of_image']){ echo ' margin_right_30'; };?>">
                             <img loading="lazy" class="image bdr_radius_24 box_shadow_image object_fit_cover" src="<?php echo esc_attr($item_image[0]); ?>"
                               width="550" height="400" />
@@ -416,7 +417,7 @@ if ($options['index_content_type'] == 'type2') {
             $super_headline = $content['super_headline'];
             ?>
             <div class="circle_custom_top">&nbsp;</div>
-            <section class="cb_design_content num<?php echo $content_count; ?>"
+            <section class="cb_design_content margin_bottom_40px num<?php echo $content_count; ?>"
               id="<?php echo 'cb_content_' . $content_count; ?>">
 
               <div class="recruitment_header cb_recruitment_section_header inview">
@@ -429,7 +430,7 @@ if ($options['index_content_type'] == 'type2') {
                   ; ?>
                 </div>
                 <!-- Continue -->
-                <div class="d_flex  flex_direction_recruitment gap_24">
+                <div class="d_flex  flex_direction_recruitment gap_24 add_animation">
                   <?php
                   for ($i = 1; $i <= 3; $i++):
                     $item_title = $content['item_title' . $i];
@@ -675,40 +676,7 @@ if ($options['index_content_type'] == 'type2') {
             ?>
           <section class="cb_blog_list num<?php echo $content_count; ?>" id="<?php echo 'cb_content_' . $content_count; ?>">
 
-            <div class="design_header cb_design_header inview">
-              <div class="title_area<?php if (!$desc) {
-                echo ' no_desc';
-              }
-              ; ?>">
-                <?php if ($headline) { ?>
-                  <h3 class="large_headline"><span>
-                      <?php echo wp_kses_post(nl2br($headline)); ?>
-                    </span></h3>
-                <?php }
-                ; ?>
-                <?php if ($sub_title) { ?>
-                  <p class="sub_title colored"><span>
-                      <?php echo esc_html($sub_title); ?>
-                    </span></p>
-                <?php }
-                ; ?>
-              </div>
-              <?php if ($desc) { ?>
-                <p class="desc <?php if ($desc_mobile) {
-                  echo 'pc';
-                }
-                ; ?> post_content">
-                  <?php echo wp_kses_post(nl2br($desc)); ?>
-                </p>
-                <?php if ($desc_mobile) { ?>
-                  <p class="desc mobile post_content">
-                    <?php echo wp_kses_post(nl2br($desc_mobile)); ?>
-                  </p>
-                <?php }
-                ; ?>
-              <?php }
-              ; ?>
-            </div>
+          <div class="circle_custom_top">&nbsp;</div>
 
             <?php
             if (is_mobile()) {
@@ -791,15 +759,15 @@ if ($options['index_content_type'] == 'type2') {
 
             </div>
 
-            <?php if ($button_label) { ?>
-              <div class="design_arrow_button cb_design_arrow_button">
-                <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>"><span class="label">
-                    <?php echo esc_html($button_label); ?>
-                  </span><span class="arrow_button"></span></a>
-              </div>
-            <?php }
-            ; ?>
-
+          
+                 <?php if ($button_label) { ?>
+                  <div class="design_full_button design_full_button_center_button cb_design_full_button">
+                    <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>"><span class="label">
+                        <?php echo esc_html($button_label); ?>
+                      </span><span class="arrow_full_button"></span></a>
+                  </div>
+                <?php }
+                ; ?>
           </section><!-- END .cb_blog -->
 
           <?php
@@ -815,23 +783,7 @@ if ($options['index_content_type'] == 'type2') {
           <section class="cb_news_list num<?php echo $content_count; ?>" id="<?php echo 'cb_content_' . $content_count; ?>">
 
             <div class="design_header cb_design_header inview">
-              <div class="title_area<?php if (!$desc) {
-                echo ' no_desc';
-              }
-              ; ?>">
-                <?php if ($headline) { ?>
-                  <h3 class="large_headline"><span>
-                      <?php echo wp_kses_post(nl2br($headline)); ?>
-                    </span></h3>
-                <?php }
-                ; ?>
-                <?php if ($sub_title) { ?>
-                  <p class="sub_title colored"><span>
-                      <?php echo esc_html($sub_title); ?>
-                    </span></p>
-                <?php }
-                ; ?>
-              </div>
+             
               <?php if ($desc) { ?>
                 <p class="desc <?php if ($desc_mobile) {
                   echo 'pc';
@@ -900,7 +852,7 @@ if ($options['index_content_type'] == 'type2') {
                     <div class="index_news_list_inner">
                       <div class="news_carousel_cat_all_wrap">
                         <div class="news_carousel_wrap swiper" id="news_carousel_cat_all">
-                          <div class="news_carousel swiper-wrapper">
+                          <div class="news_carousel swiper-wrapper gap_24px">
                             <?php
                             while ($post_list->have_posts()):
                               $post_list->the_post();
@@ -1055,14 +1007,15 @@ if ($options['index_content_type'] == 'type2') {
 
               </div><!-- END #index_news_list_wrap -->
 
-              <?php if ($button_label) { ?>
-                <div class="design_arrow_button cb_design_arrow_button">
-                  <a href="<?php echo esc_url(get_post_type_archive_link('news')); ?>"><span class="label">
-                      <?php echo esc_html($button_label); ?>
-                    </span><span class="arrow_button"></span></a>
-                </div>
-              <?php }
-              ; ?>
+             
+               <?php if ($button_label) { ?>
+                  <div class="design_full_button design_full_button_center_button cb_design_full_button">
+                    <a href="<?php echo esc_url(get_post_type_archive_link('news')); ?>"><span class="label">
+                        <?php echo esc_html($button_label); ?>
+                      </span><span class="arrow_full_button"></span></a>
+                  </div>
+                <?php }
+                ; ?>
 
             </div>
 
@@ -1103,3 +1056,4 @@ if ($options['index_content_type'] == 'type2') {
 ?>
 
   <?php get_footer(); ?>
+  
