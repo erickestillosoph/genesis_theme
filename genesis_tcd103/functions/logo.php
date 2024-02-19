@@ -12,10 +12,12 @@ function header_logo(){
   $logo_image = wp_get_attachment_image_src( $options['header_logo_image'], 'full' );
   if($logo_image) {
     $pc_image_width = $logo_image[1];
-    $pc_image_height = $logo_image[2];
+    // $pc_image_height = $logo_image[2];
+    $pc_image_height = '33';
     if($options['header_logo_retina'] == 'yes') {
       $pc_image_width = round($pc_image_width / 2);
-      $pc_image_height = round($pc_image_height / 2);
+      // $pc_image_height = round($pc_image_height / 2);
+      $pc_image_height = '33';
     };
   };
 
@@ -61,29 +63,61 @@ function header_logo(){
 //ヘッダーロゴ（白ver）　---------------------------------------------------------------------------------------------
 function header_logo2(){
 
+  // global $post;
+  // $options = get_design_plus_option();
+
+  // $pc_image_width = '';
+  // $pc_image_height = '';
+
+  // $logo_image = wp_get_attachment_image_src( $options['header_logo_image2'], 'full' );
+  // if($logo_image) {
+  //   $pc_image_width = $logo_image[1];
+  //   $pc_image_height = $logo_image[2];
+  //   if($options['header_logo_retina'] == 'yes') {
+  //     $pc_image_width = round($pc_image_width / 2);
+  //     $pc_image_height = round($pc_image_height / 2);
+  //   };
+  // };
+
+  // $logo_image_mobile = wp_get_attachment_image_src( $options['header_logo_image_mobile2'], 'full' );
+  // if($logo_image_mobile) {
+  //   $mobile_image_width = $logo_image_mobile[1];
+  //   $mobile_image_height = $logo_image_mobile[2];
+  //   if($options['header_logo_retina'] == 'yes') {
+  //     $mobile_image_width = round($mobile_image_width / 2);
+  //     $mobile_image_height = round($mobile_image_height / 2);
+  //   };
+  // };
+
+
   global $post;
   $options = get_design_plus_option();
 
   $pc_image_width = '';
   $pc_image_height = '';
 
-  $logo_image = wp_get_attachment_image_src( $options['header_logo_image2'], 'full' );
+  $logo_image = wp_get_attachment_image_src( $options['header_logo_image'], 'full' );
   if($logo_image) {
+    // $pc_image_width = $logo_image[1];
+    // $pc_image_height = $logo_image[2];
     $pc_image_width = $logo_image[1];
-    $pc_image_height = $logo_image[2];
+    $pc_image_height = '33';
     if($options['header_logo_retina'] == 'yes') {
       $pc_image_width = round($pc_image_width / 2);
-      $pc_image_height = round($pc_image_height / 2);
+      // $pc_image_height = round($pc_image_height / 2);
+      $pc_image_height = '33';
+
     };
   };
 
-  $logo_image_mobile = wp_get_attachment_image_src( $options['header_logo_image_mobile2'], 'full' );
+  $logo_image_mobile = wp_get_attachment_image_src( $options['header_logo_image_mobile'], 'full' );
   if($logo_image_mobile) {
     $mobile_image_width = $logo_image_mobile[1];
     $mobile_image_height = $logo_image_mobile[2];
     if($options['header_logo_retina'] == 'yes') {
       $mobile_image_width = round($mobile_image_width / 2);
-      $mobile_image_height = round($mobile_image_height / 2);
+      // $mobile_image_height = round($mobile_image_height / 2);
+      $mobile_image_height = '15';
     };
   };
 

@@ -100,6 +100,7 @@
            custom_wp_link_pages();
          }
     ?>
+    
    </div>
 
    <?php

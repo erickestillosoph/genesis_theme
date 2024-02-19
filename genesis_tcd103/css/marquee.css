@@ -1,0 +1,23 @@
+.section_content{
+  position: relative;
+}
+
+.marquee {
+  display: inline-flex;
+  position: absolute;
+  width: 4000px;
+  animation: marqueeAnimation 15s linear infinite;
+  border-top: 3px solid #283F75 ;
+  border-bottom: 3px solid #283F75 ;
+  background-color: #fff !important;
+  align-items: center;
+}
+
+@keyframes marqueeAnimation {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-50%, 0); }
+}
+
+.background-panel-image{
+  background-color: red;
+}

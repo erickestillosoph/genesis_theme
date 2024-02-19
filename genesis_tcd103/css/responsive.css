@@ -168,16 +168,32 @@ body.admin-bar #drawer_menu { padding-top:32px; }
  コンテンツビルダー
 ---------------------------------------------------------------------- */
 
+
+/* general */
+@media screen and (max-width:600px) {
+  .super_large_headline{ display: none; }
+}
+@media screen and (max-width:430px) {
+  #header_slider_content .content{ padding: 40px 20px !important; }
+}
+
+
 /* 共通パーツ */
 .cb_design_header { max-width:inherit; padding:0 60px; }
+.cb_custom_section_header { max-width:inherit; padding:0 60px; }
+.cb_recruitment_section_header { max-width:inherit; padding:0 60px; }
 .cb_design_arrow_button { max-width:inherit; padding:0 60px; }
 @media screen and (max-width:1100px) {
   .cb_design_header { padding:0 40px; }
+  .cb_custom_section_header { padding:0 40px; }
+  .cb_recruitment_section_header { padding:0 40px; }
   .cb_design_arrow_button { padding:0 40px; }
 }
 @media screen and (max-width:800px) {
 	.cb_design_content { padding:40px 0; }
   .cb_design_header { padding:0 20px; }
+  .cb_custom_section_header { padding:0 20px; }
+  .cb_recruitment_section_header { padding:0 20px; }
   .cb_design_arrow_button { padding:0 20px; margin-top:40px; }
 	.cb_design_content .shutter_image + .design_arrow_button { margin-top:40px; }
 }
@@ -264,9 +280,9 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
 
 
 /* お知らせ一覧 */
-.news_carousel_wrap { padding:0 60px !important; }
+.news_carousel_wrap { padding:0 120px !important; }
 @media screen and (max-width:1100px) {
-	.news_carousel_wrap { height:190px; padding:0 40px !important; }
+	.news_carousel_wrap { height:190px; padding:0 120px !important; }
   .news_carousel .item { width:440px; height:190px; padding:30px; }
 	.news_carousel .image_link { width:130px; height:130px; }
 	.news_carousel .content { width:calc(100% - 130px); padding:0 0 0 30px; }
@@ -278,7 +294,7 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
 @media screen and (max-width:800px) {
 	.cb_news_list { padding:40px 0; }
 	.cb_news_list .design_header { margin-bottom:40px; }
-	.news_carousel_wrap { height:195px; padding:0 20px !important; }
+	.news_carousel_wrap { height:195px; padding:0 100px !important; }
 	.news_carousel_wrap + .genesis_carousel_scrollbar .swiper-scrollbar { margin-top:40px !important; }
 	.news_carousel_cat_all_wrap + .genesis_carousel_scrollbar .swiper-scrollbar { margin-top:40px !important; }
 	.cb_news_list .cb_design_arrow_button { margin-top:35px; }
@@ -342,6 +358,10 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
 	body.hide_breadcrumb #container { padding-top:15px; }
 }
 
+/* LP Logo Size Mobile */
+@media screen and (max-width:1100px) {
+  img.logo_image.mobile{ height: 24px; }
+}
 
 /* LPページ */
 #lp_page_header .catch { max-width:inherit; padding:0 60px; }
@@ -528,6 +548,7 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
 @media screen and (max-width:1100px) {
   .service_category_post_list { padding:0 40px; }
 }
+
 @media screen and (max-width:950px) {
 	.service_category_post_list { display:block; }
 	.service_category_post_list .item { width:auto; margin:0 0 -1px 0; }
@@ -627,7 +648,7 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
   .news_category_button li:last-of-type { margin-right:0; }
 	.news_category_button a { height:40px; line-height:40px; padding:0 20px; font-size:14px; }
   #archive_news { padding:0 40px 150px; }
-  .news_list { display:block; width:auto; }
+  .news_list { display:block; width:auto; gap: 20px; display: grid; padding: 0px 10px ;}
 	.news_list .item { width:auto; margin:0 0 -1px 0; }
 }
 @media screen and (max-width:800px) {
@@ -780,7 +801,7 @@ body.mobile_device .cb_service_category_list .item.open .post_list { transform: 
   #drawer_menu_button span:nth-child(1) { top:24px; }
   #drawer_menu_button span:nth-child(2) { top:30px; }
   #drawer_menu_button span:nth-child(3) { top:36px; }
-	body.header_type2 #drawer_menu_button span { background:#fff; }
+	body.header_type2 #drawer_menu_button span { background: #283F75; }
 	body.header_type2.header_fixed #drawer_menu_button span { background:#000; }
   html.open_drawer_menu #drawer_menu_button span:nth-child(1) { transform:rotate(45deg); left:28px; top:30px; }
   html.open_drawer_menu #drawer_menu_button span:nth-child(3) { transform:rotate(-45deg); left:28px; top:30px; }
@@ -852,7 +873,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 ---------------------------------------------------------------------- */
 @media screen and (max-width:1250px) {
   #drawer_menu {
-    display:block; position:fixed; top:0px; right:0; width:400px; height:100vh; height:100dvh; background:#000; overflow:auto; z-index:99999;
+    display:block; position:fixed; top:0px; right:0; width:400px; height:100vh; height:100dvh; background:#fff; overflow:auto; z-index:99999;
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); -webkit-overflow-scrolling: touch; pointer-events:none; transform: translate3d(100%,0,0);
   }
   .open_menu #drawer_menu { transform: translate3d(0,0,0); pointer-events:auto; }
@@ -882,7 +903,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 /* 閉じるボタン */
 #drawer_menu .header { position:relative; width:100%; height:50px; border-bottom:1px solid rgba(255,255,255,0.2); }
 #drawer_mneu_close_button { cursor:pointer; display:block; width:50px; height:50px; position:absolute; top:0px; right:0px; z-index:10; }
-#drawer_mneu_close_button:before { color:#fff; font-family:'design_plus'; content:'\e91a'; font-size:20px; display:block; top:17px; left:12px; position:absolute; }
+#drawer_mneu_close_button:before { color:#283F75; font-family:'design_plus'; content:'\e91a'; font-size:20px; display:block; top:17px; left:12px; position:absolute; }
 
 
 /* グローバルメニュー */
@@ -891,7 +912,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 #mobile_menu li ul { display:none; }
 #mobile_menu a {
   position:relative; display:block;  margin:0; padding:0 50px 0 20px; height:50px; line-height:50px; overflow:hidden; text-decoration:none;
-  color:#fff !important; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.2); transition:none;
+  color:#283F75 !important; font-size:14px; border-bottom:1px solid rgba(28, 28, 28, 0.071); transition:none;
   overflow:hidden; white-space:nowrap; text-overflow:ellipsis; visibility:visible;
 }
 #mobile_menu li li a { border:none; height:50px; line-height:50px; }
@@ -920,7 +941,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 
 /* 検索フォーム */
 #drawer_menu_search { margin:30px 20px 0; position:relative; width:auto; }
-#drawer_menu_search .input_area { background:#222222; width:100%; height:40px; border-radius:40px; position:relative; }
+#drawer_menu_search .input_area { background:#eaeaeb; width:100%; height:40px; border-radius:40px; position:relative; }
 #drawer_menu_search .input_area input { font-size:12px; border:none; background:none; height:40px; width:calc(100% - 40px); position:absolute; left:0px; top:2px; padding:0 10px 0 25px; color:#fff; }
 #drawer_menu_search .button_area { width:40px; height:40px; position:absolute; right:0px; top:0px; }
 #drawer_menu_search .button_area input { width:40px; height:40px; border:none; background:none; cursor:pointer; }
@@ -1012,7 +1033,7 @@ body.short_content_width #bread_crumb { max-width:inherit; }
   }
 	#next_prev_post .nav:after {
     z-index:10; position:absolute; margin-top:2px; left:15px; top:50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);
-    font-family:'design_plus'; color:#000; font-size:12px; font-weight:500; display:block;
+    font-family:'Noto_Sans'; color:#000; font-size:12px; font-weight:500; display:block;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     -webkit-transition: all 0.2s ease; transition: all 0.2s ease;
   }
@@ -1113,8 +1134,8 @@ body.short_content_width #bread_crumb { max-width:inherit; }
 
 
 /* ロゴエリア */
-#footer { border-top:1px solid #ddd; }
-#footer_inner { max-width:inherit; padding:100px 60px; }
+/* #footer { border-top:1px solid #ddd; } */
+#footer_inner { max-width:inherit; padding:150px 60px; }
 @media screen and (max-width:1100px) {
   #footer_inner { padding:80px 40px; }
 }

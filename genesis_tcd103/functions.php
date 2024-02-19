@@ -58,14 +58,17 @@ function front_page_scripts(){
   wp_enqueue_script( 'jquery.easing.1.4', get_template_directory_uri() . '/js/jquery.easing.1.4.js', array(), version_num(), true );
   wp_enqueue_script( 'jscript', get_template_directory_uri() . '/js/jscript.js', array(), version_num(), true );
   wp_enqueue_script( 'jquery.cookie.min', get_template_directory_uri() . '/js/jquery.cookie.min.js', array(), version_num(), true );
-
+  wp_enqueue_style( 'marquee-text', get_template_directory_uri().'/css/marquee.css', array(), '1.0.0' );
+  wp_enqueue_script('marquee-text', get_template_directory_uri().'/js/marquee.js', array(), '1.0.0', true);
+  
 }
 add_action('wp_enqueue_scripts', 'front_page_scripts', 8); //8が無いとブロックエディタによって上書きされる
 
 
 // 管理画面用スクリプト --------------------------------------------------------------------------
-function my_admin_scripts() {
+function my_admin_scripts() { 
   $options = get_design_plus_option();
+  
   wp_enqueue_script( 'wp-color-picker');
   wp_enqueue_script('thickbox');
   wp_enqueue_script('media-upload');

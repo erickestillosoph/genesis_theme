@@ -64,7 +64,7 @@
 
 /* トップページのスライダー */
 #index_slider_layout { margin-right:-1em; margin-bottom:30px; }
-#index_slider_layout .tcd_admin_image_radio_button + label { width:calc(100% / 3 - 1.5em); }
+#index_slider_layout .tcd_admin_image_radio_button + label { width:calc(100% / 4 - 1.5em) !important; }
 
 
 /* ロード画面 */
@@ -457,6 +457,24 @@ table.cf_repeater td.col-delete { text-align: center; }
 .cb_content_switch .sep { background-color:#eee; border:1px solid #999; border-radius:100%; box-sizing:border-box; display:block; height:22px; width:22px; flex: 0 0 auto; margin:0 -11px; position: relative; }
 .cb_content_switch .off { background-color:rgba(0,0,0,0.1); color:#aaa; box-shadow:inset 2px 2px 5px 0px rgba(0,0,0,0.2); border-radius:0 22px 22px 0; padding-left:5px; }
 .cb_content_wrap.off .cb_content_switch_target { pointer-events:none; opacity:0.6; filter:grayscale(100%); }
+
+
+/* トグルボタン */
+.custom_content_switch {
+	height:50px; position:relative; display:flex; flex-wrap:wrap; align-items:center; padding:0 10px; border-right:1px solid rgba(0,0,0,0.2);
+  -ms-user-select: none; -moz-user-select: none; -o-user-select: none; -webkit-user-select: none; user-select: none;
+}
+.custom_content_switch .label_wrap {
+	border:1px solid rgba(0,0,0,0.3); display:block; border-radius:22px; height:22px; width:55px; overflow: hidden;
+}
+.custom_content_switch [type=checkbox] { display:none; }
+.custom_content_switch .label { cursor:pointer; margin-left:-34px; transition: margin .1s; display:flex; flex-wrap:nowrap; }
+.custom_content_switch input:checked + .label { margin-left:0; }
+.custom_content_switch .on, .custom_content_switch .off { display:block; width:45px; height:22px; line-height:22px; flex: 0 0 auto; text-align:center; font-size:11px; font-weight:600 !important; box-sizing:border-box; }
+.custom_content_switch .on { background-color:#0780c0; color:rgba(255,255,255,0.8); box-shadow:inset 2px 2px 5px 0px rgba(0,0,0,0.3); border-radius:22px 0 0 22px; padding-right:5px; }
+.custom_content_switch .sep { background-color:#eee; border:1px solid #999; border-radius:100%; box-sizing:border-box; display:block; height:22px; width:22px; flex: 0 0 auto; margin:0 -11px; position: relative; }
+.custom_content_switch .off { background-color:rgba(0,0,0,0.1); color:#aaa; box-shadow:inset 2px 2px 5px 0px rgba(0,0,0,0.2); border-radius:0 22px 22px 0; padding-left:5px; }
+.custom_content_wrap.off .custom_content_switch_target { pointer-events:none; opacity:0.6; filter:grayscale(100%); }
 
 
 

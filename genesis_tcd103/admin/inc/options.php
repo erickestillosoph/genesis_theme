@@ -26,12 +26,24 @@ $hover3_direct_options = array(
   'type1' => array('value' => 'type1','label' => __( 'Left to Right', 'tcd-genesis' )),
 );
 
+global $image_position_type;
+$image_position_type = array(
+  'left' => array('value' => 'left','label' => __( 'Left', 'tcd-genesis' )),
+  'right' => array('value' => 'right','label' => __( 'Right', 'tcd-genesis' )),
+);
+
+
+global $marquee_position_type;
+$marquee_position_type = array(
+  'left' => array('value' => 'left','label' => __( 'Left', 'tcd-genesis' )),
+  'right' => array('value' => 'right','label' => __( 'Right', 'tcd-genesis' )),
+);
 
 //フォントタイプ
 global $font_type_options;
 $font_type_options = array(
-  'type1' => array('value' => 'type1','label' => __( 'Meiryo', 'tcd-genesis' ),'label_en' => 'Arial'),
-  'type2' => array('value' => 'type2','label' => __( 'YuGothic', 'tcd-genesis' ),'label_en' => 'San Serif'),
+  'type1' => array('value' => 'type1','label' => __( 'Anton', 'tcd-genesis' ),'label_en' => 'Arial'),
+  'type2' => array('value' => 'type2','label' => __( 'Noto Sans', 'tcd-genesis' ),'label_en' => 'San Serif'),
   'type3' => array('value' => 'type3','label' => __( 'YuMincho', 'tcd-genesis' ),'label_en' => 'Times New Roman')
 );
 
@@ -586,6 +598,11 @@ $slider_layout_options = array(
   'type3' => array(
     'value' => 'type3',
     'label' => __( 'Type3', 'tcd-genesis' ),
+    'image' => get_template_directory_uri() . '/admin/img/slider_type3.jpg'
+  ),
+  'type4' => array(
+    'value' => 'type4',
+    'label' => __( 'Type4', 'tcd-genesis' ),
     'image' => get_template_directory_uri() . '/admin/img/slider_type3.jpg'
   )
 );
